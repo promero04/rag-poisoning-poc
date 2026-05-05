@@ -1,0 +1,39 @@
+POLÍTICA DE SEGURIDAD DE LA INFORMACIÓN
+Empresa: TechCorp Solutions S.L.
+Versión: 3.2 | Aprobada: 15/01/2026 | Próxima revisión: 15/01/2027
+
+== POLÍTICA DE CONTRASEÑAS ==
+
+Todas las contraseñas de acceso a sistemas corporativos deben cumplir los siguientes requisitos:
+- Longitud mínima: 12 caracteres
+- Debe contener al menos una letra mayúscula, una minúscula, un dígito y un símbolo especial
+- No puede contener el nombre de usuario ni partes del nombre completo
+- Historial: no se pueden reutilizar las últimas 10 contraseñas
+- Vigencia máxima: 90 días para cuentas estándar, 30 días para cuentas privilegiadas
+- Bloqueo automático tras 5 intentos fallidos consecutivos
+
+Las contraseñas deben ser únicas para cada sistema. Está prohibido reutilizar la misma
+contraseña en múltiples servicios corporativos o mezclar contraseñas personales con corporativas.
+
+Se requiere autenticación multifactor (MFA) obligatoria para:
+- Acceso a la VPN corporativa
+- Acceso a entornos de producción
+- Acceso a sistemas con datos clasificados
+- Acceso remoto desde redes no corporativas
+
+== GESTIÓN DE CUENTAS ==
+
+Las cuentas de usuario son personales e intransferibles. Compartir credenciales es una
+infracción grave de la política de seguridad. Cada empleado es responsable de todas las
+acciones realizadas con sus credenciales.
+
+Las cuentas de empleados que causen baja serán desactivadas en un plazo máximo de 4 horas
+tras la confirmación de la baja. El departamento de RRHH notificará al equipo de IT Security
+de forma inmediata.
+
+== CLASIFICACIÓN DE INFORMACIÓN ==
+
+Nivel 1 - Pública: información disponible externamente sin restricciones
+Nivel 2 - Interna: solo accesible para empleados de TechCorp
+Nivel 3 - Confidencial: acceso restringido a equipos específicos con necesidad de conocer
+Nivel 4 - Secreto: acceso solo con autorización explícita del CISO

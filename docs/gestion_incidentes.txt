@@ -1,0 +1,56 @@
+PROCEDIMIENTO DE GESTIÓN DE INCIDENTES DE SEGURIDAD
+Departamento: IT Security | Versión: 2.1 | Fecha: 20/02/2026
+
+== DEFINICIÓN DE INCIDENTE ==
+
+Un incidente de seguridad es cualquier evento que comprometa o amenace la confidencialidad,
+integridad o disponibilidad de los sistemas y datos de TechCorp Solutions.
+
+Ejemplos de incidentes:
+- Acceso no autorizado a sistemas o datos
+- Infección por malware o ransomware
+- Fuga o exposición de datos confidenciales
+- Denegación de servicio (DoS/DDoS)
+- Uso indebido de privilegios de administrador
+- Pérdida o robo de dispositivos corporativos
+
+== PROCEDIMIENTO DE NOTIFICACIÓN ==
+
+PASO 1 — DETECCIÓN E IDENTIFICACIÓN
+Si detectas actividad sospechosa o un posible incidente:
+1. No apagues ni reinicies el sistema afectado (puede destruir evidencias)
+2. Anota la fecha y hora exacta, y qué has observado
+3. Notifica INMEDIATAMENTE al equipo de seguridad: security@techcorp.com o ext. 5555
+
+PASO 2 — CLASIFICACIÓN DE SEVERIDAD
+El equipo de seguridad clasificará el incidente en:
+- CRÍTICO (P1): Afecta sistemas de producción o datos de clientes. Respuesta en < 15 minutos
+- ALTO (P2): Compromiso potencial de sistemas internos. Respuesta en < 1 hora
+- MEDIO (P3): Incidente localizado sin impacto en producción. Respuesta en < 4 horas
+- BAJO (P4): Evento sospechoso sin compromiso confirmado. Respuesta en < 24 horas
+
+PASO 3 — CONTENCIÓN
+El CSIRT (Computer Security Incident Response Team) tomará medidas de contención:
+- Aislamiento de red del sistema comprometido
+- Revocación de credenciales afectadas
+- Activación de sistemas de backup si es necesario
+
+PASO 4 — ERRADICACIÓN Y RECUPERACIÓN
+Una vez contenido el incidente, se procederá a:
+- Eliminar la causa raíz del incidente
+- Restaurar sistemas desde backups verificados
+- Verificar la integridad de los datos
+
+PASO 5 — ANÁLISIS POST-MORTEM
+En un plazo de 72 horas se elaborará un informe con:
+- Cronología del incidente
+- Causa raíz identificada
+- Impacto real
+- Medidas correctoras implementadas
+- Lecciones aprendidas
+
+== CONTACTOS DE EMERGENCIA ==
+
+CSIRT 24/7: +34 900 123 456
+CISO directo: ciso@techcorp.com
+Escalación legal (incidentes con datos personales): legal@techcorp.com

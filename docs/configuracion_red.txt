@@ -1,0 +1,66 @@
+GUÍA DE CONFIGURACIÓN Y SEGURIDAD DE RED
+TechCorp Solutions | Network & Infrastructure Security | v2.0 — 05/03/2026
+
+== ARQUITECTURA DE RED ==
+
+La red corporativa está segmentada en zonas de seguridad:
+
+DMZ (Zona Desmilitarizada)
+- Servidores web públicos y APIs expuestas a Internet
+- Separada de la red interna mediante firewall perimetral (Palo Alto NGFW)
+- Sin acceso directo a bases de datos internas
+
+RED INTERNA (LAN Corporativa)
+- Segmentada por VLANs por departamento
+- VLAN 10: Desarrollo | VLAN 20: Producción | VLAN 30: Gestión | VLAN 40: IoT
+- No está permitido el tráfico entre VLANs salvo autorización explícita
+
+RED DE GESTIÓN (OOB - Out of Band)
+- Acceso exclusivo para el equipo de operaciones de red
+- Solo accesible mediante terminal dedicado en sala de servidores
+
+== CIFRADO Y PROTOCOLOS ==
+
+Protocolos permitidos:
+- TLS 1.2 mínimo para todas las comunicaciones (TLS 1.3 recomendado)
+- SSH v2 con algoritmos de cifrado: ed25519, ecdsa-sha2-nistp256 (RSA 4096 como mínimo)
+- IPSec para VPN site-to-site
+- WireGuard para VPN de acceso remoto de empleados
+
+Protocolos prohibidos:
+- SSLv3, TLS 1.0, TLS 1.1 (vulnerables a POODLE, BEAST, etc.)
+- Telnet, FTP, HTTP sin cifrar en redes internas
+- SSH con autenticación por contraseña (solo certificados)
+- WEP/WPA para redes WiFi corporativas (usar WPA3)
+
+== FIREWALL Y FILTRADO ==
+
+Política por defecto: DENY ALL
+Solo se permite el tráfico explícitamente autorizado mediante reglas aprobadas.
+
+Flujo de aprobación de reglas de firewall:
+1. Solicitud formal con justificación de negocio
+2. Revisión por el equipo de IT Security
+3. Aprobación del Network Architect
+4. Implantación con ventana de mantenimiento
+5. Revisión de la regla cada 6 meses (purga de reglas obsoletas)
+
+== MONITORIZACIÓN DE RED ==
+
+Herramientas activas:
+- IDS/IPS: Suricata (detección de intrusiones en tiempo real)
+- SIEM: Splunk Enterprise (correlación de eventos)
+- Monitorización de flujos: NetFlow + Zeek
+- Análisis de DNS: Pi-hole + respuestas anómalas alertadas
+
+Umbrales de alerta automática:
+- Escaneo de puertos detectado → alerta P2
+- Tráfico cifrado hacia IP no clasificada superior a 1GB → alerta P2
+- Intento de acceso a VLAN de producción desde VLAN de desarrollo → alerta P1
+
+== GESTIÓN DE CERTIFICADOS ==
+
+Autoridad Certificadora interna: TechCorp Internal CA (válida para dominios *.techcorp.internal)
+Caducidad máxima de certificados: 1 año (servidores), 2 años (clientes)
+Sistema de renovación automática: cert-manager en Kubernetes + ACME para DMZ
+Monitorización de expiración: alertas 60, 30 y 7 días antes del vencimiento

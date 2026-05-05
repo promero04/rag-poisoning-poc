@@ -1,0 +1,29 @@
+# Entorno virtual
+.venv/
+venv/
+env/
+
+# Variables de entorno (contiene API keys)
+.env
+
+# Base de datos vectorial (generada por ingest.py)
+chroma_db/
+
+# Cache Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Resultados de experimentos (pueden ser grandes)
+resultados/*.json
+resultados/*.csv
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log

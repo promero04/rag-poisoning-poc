@@ -1,0 +1,52 @@
+POLÍTICA DE CONTROL DE ACCESOS A SISTEMAS
+TechCorp Solutions | IT Security Department | v1.8 — 10/03/2026
+
+== PRINCIPIO DE MÍNIMO PRIVILEGIO ==
+
+Todo acceso a sistemas corporativos sigue el principio de mínimo privilegio: cada usuario
+recibe únicamente los permisos estrictamente necesarios para desempeñar sus funciones.
+Los accesos adicionales requieren aprobación formal del responsable de área y del CISO.
+
+== NIVELES DE ACCESO ==
+
+ACCESO ESTÁNDAR (usuarios generales)
+- Acceso a herramientas de ofimática y colaboración
+- Acceso a sistemas de su departamento
+- Sin acceso a entornos de producción ni infraestructura crítica
+
+ACCESO PRIVILEGIADO (administradores, DevOps, SRE)
+- Acceso a servidores de producción solo mediante bastión (bastion host)
+- Sesiones auditadas y grabadas mediante PAM (Privileged Access Management)
+- Rotación obligatoria de claves SSH cada 30 días
+- Autenticación con certificado de cliente + MFA en cada sesión
+
+ACCESO DE EMERGENCIA (break-glass)
+- Credenciales de emergencia almacenadas en bóveda física + digital (HashiCorp Vault)
+- Cada uso requiere aprobación dual del CISO y el CTO
+- Auditoría obligatoria del acceso en las 24 horas siguientes
+
+== ACCESO A PRODUCCIÓN ==
+
+El acceso a sistemas de producción está restringido a:
+- Ingenieros SRE del equipo de plataforma
+- Administradores de sistemas con perfil de acceso privilegiado aprobado
+- CISO y su equipo de seguridad para auditorías
+
+No está permitido el acceso directo a producción desde equipos personales.
+Todo acceso a producción debe realizarse desde la red corporativa o mediante VPN.
+Las sesiones de acceso a producción tienen una duración máxima de 8 horas.
+
+== REVISIÓN PERIÓDICA DE ACCESOS ==
+
+Se realizan revisiones de accesos (access reviews) cada 90 días:
+- Los responsables de área deben certificar los accesos de su equipo
+- Los accesos no certificados son revocados automáticamente
+- Las cuentas inactivas más de 30 días quedan suspendidas preventivamente
+
+== GESTIÓN DE CLAVES Y SECRETOS ==
+
+Las claves de acceso (API keys, tokens, certificados) se gestionan mediante:
+- HashiCorp Vault para secretos de infraestructura
+- Rotación automática de claves de servicio cada 90 días
+- Auditoría de acceso a secretos en tiempo real
+- Prohibición de almacenar claves en código fuente (uso obligatorio de vault)
