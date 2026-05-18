@@ -17,12 +17,38 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
 # ── Python virtual environment ───────────────────────────────────────────────
-# El python3 por defecto en macOS suele ser 3.9.6 (Apple stock). Usamos un
-# python moderno si esta disponible (Homebrew python3.13). En Linux normalmente
-# el python3 del sistema ya es >=3.10 y vale.
+# El python3 por defecto en macOS suele ser 3.9.6 (Apple stock). Buscamos un
+# python moderno (>=3.10) en homebrew y como fallback en el PATH.
 
-PYTHON_BIN="$(command -v python3.13 || command -v python3.12 || command -v python3.11 || command -v python3.10 || command -v python3)"
+find_python() {
+    # Probar candidatos en orden: homebrew (Apple Silicon e Intel) y PATH.
+    for cand in \
+        /opt/homebrew/bin/python3.13 \
+        /opt/homebrew/bin/python3.12 \
+        /opt/homebrew/bin/python3.11 \
+        /opt/homebrew/bin/python3.10 \
+        /usr/local/bin/python3.13 \
+        /usr/local/bin/python3.12 \
+        /usr/local/bin/python3.11 \
+        /usr/local/bin/python3.10 \
+        "$(command -v python3.13)" \
+        "$(command -v python3.12)" \
+        "$(command -v python3.11)" \
+        "$(command -v python3.10)" \
+        "$(command -v python3)" ; do
+        if [ -n "$cand" ] && [ -x "$cand" ]; then
+            echo "$cand"
+            return 0
+        fi
+    done
+    return 1
+}
 
+PYTHON_BIN="$(find_python)"
+if [ -z "$PYTHON_BIN" ]; then
+    echo "ERROR: no se encuentra ningun Python >=3.10 ni 3.x en el sistema."
+    exit 1
+fi
 echo "→ Creando entorno virtual con: $PYTHON_BIN ($($PYTHON_BIN --version))"
 "$PYTHON_BIN" -m venv .venv
 source .venv/bin/activate
