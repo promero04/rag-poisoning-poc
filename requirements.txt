@@ -2,33 +2,36 @@
 # Proyecto SDI — Seguridad de la Información — Deusto 2025/26
 # Pablo García
 #
-# NOTA: versiones verificadas con Python 3.13.12 (2026-03-28)
-# Instalar torch CPU-only ANTES de este fichero:
+# Probado con Python 3.13 (Homebrew). Instalar torch CPU-only ANTES de
+# este fichero:
 #   pip install torch --index-url https://download.pytorch.org/whl/cpu
 # Luego:
 #   pip install -r requirements.txt
+#
+# Las versiones usan rangos compatibles, no pins exactos, para que el
+# resolver de pip elija lo ultimo compatible sin romper APIs.
 
 # ── Core RAG ──────────────────────────────────────────────────────────────────
-langchain==1.2.13
-langchain-community==0.4.1
-langchain-core==1.2.23
-langchain-text-splitters==1.1.1
+langchain>=0.3.0,<0.4.0
+langchain-community>=0.3.0,<0.4.0
+langchain-core>=0.3.0,<0.4.0
+langchain-text-splitters>=0.3.0,<0.4.0
 
 # ── Vector Store ──────────────────────────────────────────────────────────────
-chromadb==1.5.5
-langchain-chroma==1.1.0
+chromadb>=0.5.0,<1.0.0
+langchain-chroma>=0.1.4,<0.3.0
 
 # ── Embeddings (local, sin API) ───────────────────────────────────────────────
-sentence-transformers==5.3.0
-langchain-huggingface==1.2.1
+sentence-transformers>=3.0,<6.0
+langchain-huggingface>=0.1.0,<0.3.0
 
 # ── LLM: Ollama (local) + OpenAI (fallback) ───────────────────────────────────
-langchain-ollama==1.0.1
-langchain-openai==1.1.12       # Sólo si se tiene API key
+langchain-ollama>=0.2.0,<0.4.0
+langchain-openai>=0.2.0,<0.4.0       # Solo si se tiene API key
 
 # ── Utilidades ────────────────────────────────────────────────────────────────
-python-dotenv==1.2.2
-colorama==0.4.6                # Colores en terminal para la demo
-tabulate==0.10.0               # Tablas en los resultados
-pyyaml>=6.0                    # Carga de datasets (queries, indicadores)
-matplotlib>=3.8                # Graficos de resultados (metricas.py --plots)
+python-dotenv>=1.0.0
+colorama>=0.4.6                 # Colores en terminal para la demo
+tabulate>=0.9.0                 # Tablas en los resultados
+pyyaml>=6.0                     # Carga de datasets (queries, indicadores)
+matplotlib>=3.8                 # Graficos de resultados (metricas.py --plots)

@@ -17,8 +17,14 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
 # ── Python virtual environment ───────────────────────────────────────────────
-echo "→ Creando entorno virtual Python..."
-python3 -m venv .venv
+# El python3 por defecto en macOS suele ser 3.9.6 (Apple stock). Usamos un
+# python moderno si esta disponible (Homebrew python3.13). En Linux normalmente
+# el python3 del sistema ya es >=3.10 y vale.
+
+PYTHON_BIN="$(command -v python3.13 || command -v python3.12 || command -v python3.11 || command -v python3.10 || command -v python3)"
+
+echo "→ Creando entorno virtual con: $PYTHON_BIN ($($PYTHON_BIN --version))"
+"$PYTHON_BIN" -m venv .venv
 source .venv/bin/activate
 
 echo "→ Actualizando pip..."
