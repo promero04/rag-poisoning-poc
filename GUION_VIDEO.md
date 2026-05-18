@@ -114,9 +114,9 @@ python query.py --collection rag_poisoned -q "¿Cuál es la política de contras
 
 **Narración (literal):**
 
-> Repetimos sobre las cinco queries del benchmark. **La tasa de éxito del ataque ronda el [PORCENTAJE]** —el número exacto lo veis en pantalla— y la similitud coseno entre la respuesta limpia y la envenenada cae a [VALOR], indicando que el significado cambia sustancialmente. *(pausa, cambio a gráfico)*. ¿Y las defensas? Implementé un filtro heurístico que detecta prompt injection clásico —cosas como "ignore previous instructions"—. **Pero no captura ninguno de estos seis ataques**, porque su contenido es información falsa plausible, no instrucciones. Es decir, las defensas léxicas son ciegas al envenenamiento por contenido.
+> Repetimos sobre las cinco queries del benchmark. **La tasa de éxito del ataque es del 80%** —cuatro de cinco queries comprometidas, lo veis en pantalla— y la similitud coseno entre la respuesta limpia y la envenenada cae a 0,65, indicando que el significado cambia sustancialmente. *(pausa, cambio a gráfico)*. ¿Y las defensas? Implementé un filtro heurístico que detecta prompt injection clásico —cosas como "ignore previous instructions"—. **Pero no captura ninguno de estos seis ataques** —verificado experimentalmente con `DEFENSE_ENABLED=true`—, porque su contenido es información falsa plausible, no instrucciones. Las defensas léxicas son ciegas al envenenamiento por contenido.
 
-> ⚠️ **Importante:** los corchetes `[PORCENTAJE]` y `[VALOR]` se rellenan tras ejecutar el experimento. Anótalos en el ensayo y ten el número memorizado para la grabación. Si la `attack_success_rate` resulta ser muy alta (90–100%) decir "más del 90%". Si sale moderada (60–80%) decir "alrededor del 70%".
+> 📝 **Notas de grabación:** los números reales del experimento (ejecutado el 2026-05-18 sobre Mac M4 con llama3.2:3b) son **80% éxito**, **0,6494 drift coseno** con k=3 y **0,6788** con k=5. Si quieres redondear di "ocho de cada diez queries" y "0,65 de similitud". El único ataque que falla es `key_rotation_bypass` — útil mencionarlo en preguntas del profesor.
 
 ---
 

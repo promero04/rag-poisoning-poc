@@ -27,3 +27,5 @@ resultados/*.csv
 
 # Logs
 *.log
+/.ssh_helper.py
+/.sftp_sync.py
