@@ -134,6 +134,7 @@ def generar_informe_markdown(resultados_por_k: dict[int, dict]) -> str:
             f"{metrics.get('queries_answer_poisoned', '?')}/{metrics.get('total_queries', 5)} |",
             f"| **Tasa de éxito total del ataque** | **{metrics.get('attack_success_rate', '?')}** |",
             f"| Media de chunks envenenados en top-{k} | {metrics.get('avg_poison_chunks_per_query', '?')} |",
+            f"| Drift coseno medio (1.0 = idénticas) | {metrics.get('avg_answer_drift_cosine', 'N/A')} |",
             f"",
         ]
 

@@ -28,6 +28,7 @@ from colorama import Fore, Style, init as colorama_init
 colorama_init(autoreset=True)
 
 RESULTS_DIR = Path("./resultados")
+PLOTS_DIR   = RESULTS_DIR / "plots"
 
 # Tipos de ataque y sus etiquetas legibles
 ATTACK_TYPE_LABELS = {
@@ -171,6 +172,131 @@ def analizar_resultados(data: dict, k: Optional[int] = None) -> dict:
     return resumen
 
 
+# ─── Graficos (P3-01) ────────────────────────────────────────────────────────
+
+def generar_plots(data: dict, output_dir: Path = PLOTS_DIR, suffix: str = "") -> list[Path]:
+    """
+    Genera graficos PNG a partir de un resultado de demo_poisoning.
+
+    Produce hasta 3 PNG:
+      1. Tasa de exito retrieval/answer por query (barras agrupadas).
+      2. Drift coseno por query (barras horizontales).
+      3. Distribucion de scores de similitud baseline vs envenenado.
+
+    Returns:
+        Lista de rutas a los PNG generados.
+    """
+    try:
+        import matplotlib
+        matplotlib.use("Agg")  # backend no interactivo, para entornos sin display
+        import matplotlib.pyplot as plt
+    except ImportError:
+        print(f"{Fore.YELLOW}matplotlib no esta instalado. "
+              f"Anadelo con: pip install matplotlib{Style.RESET_ALL}")
+        return []
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    plots: list[Path] = []
+
+    comparisons = data.get("comparisons", [])
+    if not comparisons:
+        print(f"{Fore.YELLOW}Sin comparisons en el JSON; no se generan plots.{Style.RESET_ALL}")
+        return plots
+
+    # Etiquetas cortas para el eje x
+    def short(q: str, n: int = 28) -> str:
+        return (q[: n - 1] + "…") if len(q) > n else q
+
+    labels      = [short(c["query"]) for c in comparisons]
+    retrieval   = [1 if c["retrieval_compromised"] else 0 for c in comparisons]
+    answer      = [1 if c["answer_poisoned"] else 0 for c in comparisons]
+    drift       = [c.get("answer_drift_cosine") for c in comparisons]
+
+    # ── 1. Retrieval vs answer compromise por query ──
+    fig, ax = plt.subplots(figsize=(10, 5))
+    x = range(len(labels))
+    width = 0.35
+    ax.bar([i - width / 2 for i in x], retrieval, width,
+           label="Retrieval comprometido", color="#d62728")
+    ax.bar([i + width / 2 for i in x], answer, width,
+           label="Respuesta contaminada (heuristica)", color="#ff7f0e")
+    ax.set_xticks(list(x))
+    ax.set_xticklabels(labels, rotation=20, ha="right")
+    ax.set_yticks([0, 1])
+    ax.set_yticklabels(["No", "Si"])
+    ax.set_ylabel("Comprometido")
+    ax.set_title("Exito del ataque por query")
+    ax.legend()
+    fig.tight_layout()
+    p1 = output_dir / f"attack_per_query{suffix}.png"
+    fig.savefig(p1, dpi=120)
+    plt.close(fig)
+    plots.append(p1)
+
+    # ── 2. Drift coseno por query ──
+    drift_vals = [d if d is not None else 0.0 for d in drift]
+    fig, ax = plt.subplots(figsize=(10, 4))
+    bars = ax.barh(labels, drift_vals, color="#1f77b4")
+    ax.set_xlim(0, 1)
+    ax.set_xlabel("Similitud coseno (baseline vs envenenada). 1.0 = identica.")
+    ax.set_title("Drift semantico de la respuesta tras el envenenamiento")
+    for bar, val in zip(bars, drift_vals):
+        ax.text(min(val + 0.01, 0.99), bar.get_y() + bar.get_height() / 2,
+                f"{val:.3f}", va="center", fontsize=8)
+    fig.tight_layout()
+    p2 = output_dir / f"answer_drift{suffix}.png"
+    fig.savefig(p2, dpi=120)
+    plt.close(fig)
+    plots.append(p2)
+
+    # ── 3. Distribucion de scores baseline vs envenenado ──
+    baseline_scores: list[float] = []
+    poisoned_legit_scores: list[float] = []
+    poisoned_poison_scores: list[float] = []
+    for b, p in zip(data.get("baseline_results", []), data.get("poisoned_results", [])):
+        for s in b.get("sources", []):
+            if s.get("similarity_score") is not None:
+                baseline_scores.append(s["similarity_score"])
+        for s in p.get("sources", []):
+            score = s.get("similarity_score")
+            if score is None:
+                continue
+            if s.get("is_poisoned"):
+                poisoned_poison_scores.append(score)
+            else:
+                poisoned_legit_scores.append(score)
+
+    if baseline_scores or poisoned_legit_scores or poisoned_poison_scores:
+        fig, ax = plt.subplots(figsize=(8, 4))
+        bins = 12
+        if baseline_scores:
+            ax.hist(baseline_scores, bins=bins, alpha=0.5,
+                    label=f"Baseline legitimos (n={len(baseline_scores)})",
+                    color="#2ca02c")
+        if poisoned_legit_scores:
+            ax.hist(poisoned_legit_scores, bins=bins, alpha=0.5,
+                    label=f"Envenenado legitimos (n={len(poisoned_legit_scores)})",
+                    color="#1f77b4")
+        if poisoned_poison_scores:
+            ax.hist(poisoned_poison_scores, bins=bins, alpha=0.7,
+                    label=f"Envenenado maliciosos (n={len(poisoned_poison_scores)})",
+                    color="#d62728")
+        ax.set_xlabel("Score de similitud coseno")
+        ax.set_ylabel("Frecuencia")
+        ax.set_title("Distribucion de scores en top-k")
+        ax.legend()
+        fig.tight_layout()
+        p3 = output_dir / f"score_distribution{suffix}.png"
+        fig.savefig(p3, dpi=120)
+        plt.close(fig)
+        plots.append(p3)
+
+    print(f"{Fore.GREEN}Plots generados: {len(plots)}{Style.RESET_ALL}")
+    for p in plots:
+        print(f"  -> {p}")
+    return plots
+
+
 def analisis_live():
     """
     Ejecuta consultas de similitud en tiempo real para ver el posicionamiento
@@ -219,6 +345,11 @@ def main():
         action="store_true",
         help="Ejecutar análisis de similitud en tiempo real",
     )
+    parser.add_argument(
+        "--plots",
+        action="store_true",
+        help="Generar graficos PNG en resultados/plots/",
+    )
     args = parser.parse_args()
 
     if args.live:
@@ -248,6 +379,10 @@ def main():
                     pass
             resumen = analizar_resultados(data, k=k)
             resumenes.append(resumen)
+
+            if args.plots:
+                suffix = f"_k{k}" if k is not None else f"_{path.stem}"
+                generar_plots(data, suffix=suffix)
 
     # Guardar resumen JSON
     if resumenes:

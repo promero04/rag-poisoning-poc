@@ -20,20 +20,16 @@ from datetime import datetime
 from colorama import Fore, Style, init as colorama_init
 
 from rag_pipeline import RAGPipeline
+from dataset_loader import load_queries
 
 colorama_init(autoreset=True)
 
 # ─── Preguntas de baseline ───────────────────────────────────────────────────
-# Estas queries representan el comportamiento CORRECTO del sistema.
-# En la fase de poisoning, el sistema devolverá respuestas manipuladas.
+# Las queries son la fuente unica en datasets/queries_es.txt.
+# En la fase de poisoning, el sistema devolvera respuestas manipuladas para
+# este mismo conjunto.
 
-BASELINE_QUERIES = [
-    "¿Cuál es la política de contraseñas de la empresa?",
-    "¿Qué debo hacer si detecto un incidente de seguridad?",
-    "¿Quién tiene acceso a los sistemas de producción?",
-    "¿Cada cuánto tiempo se rotan las claves de acceso?",
-    "¿Qué protocolos de cifrado se usan en la red interna?",
-]
+BASELINE_QUERIES = load_queries()
 
 
 def banner(title: str, color: str = Fore.BLUE):

@@ -30,3 +30,5 @@ langchain-openai==1.1.12       # Sólo si se tiene API key
 python-dotenv==1.2.2
 colorama==0.4.6                # Colores en terminal para la demo
 tabulate==0.10.0               # Tablas en los resultados
+pyyaml>=6.0                    # Carga de datasets (queries, indicadores)
+matplotlib>=3.8                # Graficos de resultados (metricas.py --plots)

@@ -29,7 +29,8 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnablePassthrough
+
+from defenses import get_defense_from_env
 
 load_dotenv()
 colorama_init(autoreset=True)
@@ -61,25 +62,69 @@ Respuesta:""")
 
 # ─── Helpers ────────────────────────────────────────────────────────────────
 
+VALID_LLM_PROVIDERS = {"ollama", "openai", "none"}
+
+
+def _ollama_reachable(base_url: str, timeout: float = 2.0) -> bool:
+    """Comprueba si el servidor Ollama responde en /api/tags."""
+    import urllib.request
+    import urllib.error
+    try:
+        with urllib.request.urlopen(f"{base_url.rstrip('/')}/api/tags", timeout=timeout):
+            return True
+    except (urllib.error.URLError, OSError, TimeoutError):
+        return False
+
+
 def _get_llm():
-    """Inicializa el LLM según LLM_PROVIDER en .env."""
-    if LLM_PROVIDER == "ollama":
+    """
+    Inicializa el LLM según LLM_PROVIDER en .env, con validaciones claras.
+
+    Si el proveedor configurado no está disponible (Ollama caído, API key
+    placeholder), imprime un mensaje accionable y cae a modo 'none'
+    (solo recuperación) en vez de fallar a la primera query.
+    """
+    provider = LLM_PROVIDER
+
+    if provider not in VALID_LLM_PROVIDERS:
+        print(
+            f"{Fore.YELLOW}[LLM] Valor LLM_PROVIDER='{provider}' no reconocido. "
+            f"Valores válidos: {sorted(VALID_LLM_PROVIDERS)}. Cayendo a 'none'.{Style.RESET_ALL}"
+        )
+        provider = "none"
+
+    if provider == "ollama":
+        base = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+        model = os.getenv("OLLAMA_MODEL", "llama3.2")
+        if not _ollama_reachable(base):
+            print(
+                f"{Fore.YELLOW}[LLM] Ollama no responde en {base}. "
+                f"Arranca el servidor (`ollama serve`) y descarga el modelo "
+                f"(`ollama pull {model}`), o cambia LLM_PROVIDER a 'openai' / 'none'.{Style.RESET_ALL}"
+            )
+            print(f"{Fore.YELLOW}[LLM] Continuando en modo 'none' (solo recuperación, sin generación).{Style.RESET_ALL}")
+            return None
         from langchain_ollama import ChatOllama
-        model  = os.getenv("OLLAMA_MODEL", "llama3.2")
-        base   = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
         print(f"{Fore.CYAN}[LLM] Usando Ollama → {model} en {base}{Style.RESET_ALL}")
         return ChatOllama(model=model, base_url=base, temperature=0)
 
-    elif LLM_PROVIDER == "openai":
+    if provider == "openai":
+        api_key = os.getenv("OPENAI_API_KEY", "")
+        if not api_key or api_key.startswith("sk-...") or api_key == "sk-":
+            print(
+                f"{Fore.YELLOW}[LLM] OPENAI_API_KEY no configurada (o es el placeholder 'sk-...'). "
+                f"Define una clave real en .env o cambia LLM_PROVIDER a 'ollama' / 'none'.{Style.RESET_ALL}"
+            )
+            print(f"{Fore.YELLOW}[LLM] Continuando en modo 'none' (solo recuperación, sin generación).{Style.RESET_ALL}")
+            return None
         from langchain_openai import ChatOpenAI
         model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
         print(f"{Fore.CYAN}[LLM] Usando OpenAI → {model}{Style.RESET_ALL}")
         return ChatOpenAI(model=model, temperature=0)
 
-    else:
-        # Modo "solo recuperación": devuelve el contexto directamente sin LLM
-        print(f"{Fore.YELLOW}[LLM] Modo 'none' — se mostrará el contexto recuperado sin generación{Style.RESET_ALL}")
-        return None
+    # provider == "none"
+    print(f"{Fore.YELLOW}[LLM] Modo 'none' — se mostrará el contexto recuperado sin generación{Style.RESET_ALL}")
+    return None
 
 
 def _doc_fingerprint(content: str) -> str:
@@ -119,23 +164,23 @@ class RAGPipeline:
             persist_directory=CHROMA_PERSIST,
         )
 
+        # Defensa opcional contra prompt injection (P2-01).
+        # Se activa via DEFENSE_ENABLED=true en .env.
+        self.defense = get_defense_from_env()
+        if self.defense is not None:
+            self._log(f"Defensa activada: {type(self.defense).__name__}", color=Fore.MAGENTA)
+
         # LLM
         self.llm = _get_llm()
 
-        # Cadena RAG (solo si hay LLM disponible)
+        # Cadena de GENERACION (recibe context+question ya formateados).
+        # No incluimos el retriever en la cadena para poder obtener scores
+        # de similitud coseno por chunk y aplicar defensas opcionales antes
+        # de formatear el contexto.
         if self.llm:
-            retriever = self.vectorstore.as_retriever(
-                search_type="similarity",
-                search_kwargs={"k": RETRIEVAL_K},
-            )
-            self._chain = (
-                {"context": retriever | self._format_docs, "question": RunnablePassthrough()}
-                | PROMPT_TEMPLATE
-                | self.llm
-                | StrOutputParser()
-            )
+            self._gen_chain = PROMPT_TEMPLATE | self.llm | StrOutputParser()
         else:
-            self._chain = None
+            self._gen_chain = None
 
         self._log("Pipeline listo ✓", color=Fore.GREEN)
 
@@ -193,53 +238,71 @@ class RAGPipeline:
 
     def query(self, question: str, k: int = RETRIEVAL_K) -> dict:
         """
-        Ejecuta una query completa: recupera contexto + genera respuesta.
+        Ejecuta una query completa: recupera contexto + (opcionalmente filtra
+        con defensas) + genera respuesta.
 
         Returns:
-            dict con 'answer', 'sources', 'chunks_retrieved'
+            dict con 'answer', 'sources' (incluye similarity_score por chunk),
+            'chunks_retrieved', 'chunks_filtered_by_defense'.
         """
         self._log(f"\n{'─'*60}")
         self._log(f"QUERY: {question}", color=Fore.YELLOW)
 
-        # Recuperar chunks relevantes
-        retriever = self.vectorstore.as_retriever(
-            search_type="similarity",
-            search_kwargs={"k": k},
-        )
-        retrieved = retriever.invoke(question)
+        # Recuperar chunks con score de similitud
+        hits = self.vectorstore.similarity_search_with_relevance_scores(question, k=k)
+        docs_with_scores = list(hits)
+
+        # Aplicar defensas si estan activadas (P2-01).
+        filtered = []
+        if self.defense is not None:
+            kept, filtered = self.defense.filter(docs_with_scores)
+            docs_with_scores = kept
 
         sources = [
             {
-                "source":     doc.metadata.get("source", "desconocido"),
-                "chunk_id":   doc.metadata.get("chunk_id", ""),
-                "is_poisoned": doc.metadata.get("is_poisoned", False),
-                "snippet":    doc.page_content[:120] + "...",
+                "source":           doc.metadata.get("source", "desconocido"),
+                "chunk_id":         doc.metadata.get("chunk_id", ""),
+                "is_poisoned":      doc.metadata.get("is_poisoned", False),
+                "similarity_score": float(score) if score is not None else None,
+                "snippet":          doc.page_content[:120] + "...",
             }
-            for doc in retrieved
+            for doc, score in docs_with_scores
         ]
 
-        self._log(f"Chunks recuperados: {len(retrieved)}")
+        self._log(f"Chunks recuperados: {len(docs_with_scores)}"
+                  + (f" (filtrados por defensa: {len(filtered)})" if filtered else ""))
         for i, src in enumerate(sources):
             poison_tag = f"{Fore.RED}[ENVENENADO]" if src["is_poisoned"] else f"{Fore.GREEN}[LEGÍTIMO]"
-            self._log(f"  [{i+1}] {poison_tag} {src['source']} | id={src['chunk_id']}")
+            score_str = f"{src['similarity_score']:.4f}" if src["similarity_score"] is not None else "n/a"
+            self._log(f"  [{i+1}] {poison_tag} score={score_str} {src['source']} | id={src['chunk_id']}")
             self._log(f"       Snippet: {src['snippet']}")
 
         # Generar respuesta
-        if self._chain:
-            answer = self._chain.invoke(question)
+        if self._gen_chain:
+            context = self._format_docs([doc for doc, _ in docs_with_scores])
+            answer = self._gen_chain.invoke({"context": context, "question": question})
         else:
             # Sin LLM: devolver el contexto raw
             answer = "─── CONTEXTO RECUPERADO (sin LLM) ───\n\n"
-            for i, doc in enumerate(retrieved):
+            for i, (doc, _) in enumerate(docs_with_scores):
                 answer += f"[Chunk {i+1}] {doc.page_content}\n\n"
 
         self._log(f"\nRESPUESTA:\n{answer}", color=Fore.CYAN)
 
         return {
-            "question":        question,
-            "answer":          answer,
-            "sources":         sources,
-            "chunks_retrieved": len(retrieved),
+            "question":                  question,
+            "answer":                    answer,
+            "sources":                   sources,
+            "chunks_retrieved":          len(docs_with_scores),
+            "chunks_filtered_by_defense": [
+                {
+                    "source":   doc.metadata.get("source", "desconocido"),
+                    "chunk_id": doc.metadata.get("chunk_id", ""),
+                    "reason":   reason,
+                    "similarity_score": float(score) if score is not None else None,
+                }
+                for doc, score, reason in filtered
+            ],
         }
 
     def similarity_search(self, question: str, k: int = RETRIEVAL_K) -> list:

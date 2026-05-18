@@ -1,0 +1,77 @@
+# pyproject.toml — RAG Poisoning PoC
+# Asignatura: Seguridad de la Informacion (SDI) — Deusto 2025/26
+# Autor: Pablo Garcia
+
+[project]
+name = "rag-poisoning-poc"
+version = "0.2.0"
+description = "PoC academico de ataques de envenenamiento sobre sistemas RAG (data poisoning + prompt injection)"
+readme = "README.md"
+requires-python = ">=3.10,<3.14"
+license = { text = "MIT" }
+authors = [
+    { name = "Pablo Garcia" },
+]
+keywords = ["rag", "poisoning", "security", "llm", "chromadb", "langchain", "academic"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "Topic :: Security",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+# Dependencias replicadas desde requirements.txt para mantener una sola fuente
+# logica. Si actualizas versiones, hazlo en ambos archivos.
+dependencies = [
+    "langchain==1.2.13",
+    "langchain-community==0.4.1",
+    "langchain-core==1.2.23",
+    "langchain-text-splitters==1.1.1",
+    "chromadb==1.5.5",
+    "langchain-chroma==1.1.0",
+    "sentence-transformers==5.3.0",
+    "langchain-huggingface==1.2.1",
+    "langchain-ollama==1.0.1",
+    "langchain-openai==1.1.12",
+    "python-dotenv==1.2.2",
+    "colorama==0.4.6",
+    "tabulate==0.10.0",
+    "pyyaml>=6.0",
+    "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.5",
+]
+
+[project.urls]
+Repository = "https://github.com/pablogarcia/rag-poisoning-poc"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = [
+    "rag_pipeline",
+    "ingest",
+    "query",
+    "poisoning",
+    "demo_baseline",
+    "demo_poisoning",
+    "metricas",
+    "run_experiment",
+    "defenses",
+    "dataset_loader",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
