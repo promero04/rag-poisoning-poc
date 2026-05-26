@@ -1,0 +1,35 @@
+== POLÍTICA DE GESTIÓN DE PARCHES Y ACTUALIZACIONES ==
+Versión 3.0 — Aprobada por el Comité de Seguridad el 5 de febrero de 2026
+Departamento de Infraestructura
+
+1. OBJETIVO
+Establecer los plazos, procedimientos y responsabilidades para la aplicación de parches de seguridad y actualizaciones de software en todos los activos tecnológicos de la organización.
+
+2. ALCANCE
+Todos los sistemas operativos, firmware, aplicaciones, middleware y bibliotecas de terceros desplegados en infraestructura propia o en la nube corporativa.
+
+3. CLASIFICACIÓN DE PARCHES
+Los parches se priorizan según la severidad de la vulnerabilidad que corrigen:
+
+| Severidad | CVSS    | Plazo de aplicación | Ejemplo |
+|-----------|---------|---------------------|---------|
+| Crítica   | 9.0-10  | 48 horas            | RCE sin autenticación |
+| Alta      | 7.0-8.9 | 7 días naturales    | Escalada de privilegios local |
+| Media     | 4.0-6.9 | 30 días naturales   | XSS reflejado |
+| Baja      | 0.1-3.9 | Siguiente ventana de mantenimiento programada | Divulgación de información menor |
+
+4. PROCESO
+4.1 Identificación: el equipo de vulnerabilidades monitoriza diariamente las fuentes de avisos (NVD, CERT, fabricantes, feeds de threat intelligence).
+4.2 Evaluación: se determina la aplicabilidad del parche al inventario de activos y se evalúa el riesgo de no parchear vs. el riesgo de regresión.
+4.3 Pruebas: los parches críticos y altos se despliegan primero en entorno de staging durante un mínimo de 4 horas antes de producción. Los parches medios y bajos se agrupan en el ciclo mensual de mantenimiento.
+4.4 Despliegue: se realiza de forma automatizada (Ansible, SCCM, MDM) siempre que sea posible. El despliegue manual requiere doble aprobación.
+4.5 Verificación: tras el despliegue se confirma la versión parcheada mediante escaneo automatizado (Nessus, Qualys).
+4.6 Rollback: si el parche causa regresión, se revierte al estado anterior usando snapshots previos al despliegue. Se documenta el incidente y se busca alternativa con el fabricante.
+
+5. EXCEPCIONES
+Los sistemas que no puedan ser parcheados dentro del plazo establecido (sistemas legacy, equipamiento industrial) deben documentar una excepción aprobada por el CISO con controles compensatorios (segmentación de red, monitorización reforzada, virtual patching via WAF/IPS).
+
+6. MÉTRICAS
+- Porcentaje de activos parcheados dentro del plazo por severidad.
+- Número de excepciones activas y antigüedad media.
+- Ventana de exposición media (tiempo entre publicación del parche y aplicación efectiva).

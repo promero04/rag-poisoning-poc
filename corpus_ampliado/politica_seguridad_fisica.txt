@@ -1,0 +1,49 @@
+== POLÍTICA DE SEGURIDAD FÍSICA Y AMBIENTAL ==
+Versión 3.0 — Aprobada por Dirección General el 10 de enero de 2026
+Departamento de Instalaciones y Seguridad de la Información
+
+1. OBJETIVO
+Proteger los activos de información mediante controles de seguridad física que prevengan el acceso no autorizado, el daño y las interferencias en las instalaciones y equipos de la organización.
+
+2. ZONAS DE SEGURIDAD
+Las instalaciones se dividen en zonas con niveles de protección crecientes:
+
+| Zona | Descripción | Acceso |
+|------|-------------|--------|
+| Pública | Recepción, vestíbulo | Abierto, con registro de visitantes |
+| Controlada | Oficinas generales, salas de reuniones | Tarjeta de empleado (RFID) |
+| Restringida | Salas de servidores, archivos confidenciales | Tarjeta + PIN + registro biométrico |
+| Crítica | CPD principal, sala de comunicaciones | Tarjeta + PIN + biometría + acompañamiento autorizado |
+
+3. CONTROL DE ACCESO FÍSICO
+- Todo empleado porta tarjeta identificativa visible durante su estancia en las instalaciones.
+- Los visitantes se registran en recepción, reciben tarjeta temporal y son acompañados en todo momento por un empleado.
+- Las puertas de zonas restringidas y críticas disponen de cierre automático y alarma de puerta abierta (> 30 segundos).
+- Prohibido el tailgating (seguir a otra persona sin identificarse).
+
+4. CENTRO DE PROCESAMIENTO DE DATOS (CPD)
+- Ubicación sin señalización externa que lo identifique.
+- Sistema de climatización redundante (N+1) con monitorización continua de temperatura (18-27°C) y humedad (40-60%).
+- Sistema de detección y extinción de incendios con agente limpio (gas inerte FM-200 o Novec 1230).
+- SAI (UPS) con autonomía mínima de 30 minutos y grupo electrógeno con arranque automático.
+- Suelo técnico elevado con detección de fugas de agua.
+
+5. PROTECCIÓN DE EQUIPOS
+- Los equipos críticos (servidores, equipos de red, cabinas de almacenamiento) se instalan en racks cerrados con llave.
+- Los cables de alimentación y datos se protegen contra interceptación y daño.
+- El mantenimiento de equipos se realiza exclusivamente por personal autorizado y se registra en el sistema de gestión de activos.
+
+6. ELIMINACIÓN SEGURA
+- Los medios de almacenamiento (discos, cintas, USB) se destruyen conforme a NIST SP 800-88 antes de su descarte o donación.
+- Los documentos en papel se destruyen mediante destructora de corte cruzado (P-4 mínimo DIN 66399).
+- Se emite certificado de destrucción para cada lote.
+
+7. VIDEOVIGILANCIA
+- Cámaras de videovigilancia en accesos, pasillos principales, zonas restringidas y CPD.
+- Grabaciones con retención mínima de 30 días.
+- Acceso a las grabaciones restringido al equipo de seguridad física y al CISO.
+- Cumplimiento de la LOPD-GDD: carteles informativos en zonas videovigiladas, registro de la actividad de tratamiento y limitación de la finalidad.
+
+8. AUDITORÍA
+- Revisión semestral de los registros de acceso físico por parte de Seguridad.
+- Test anual de intrusión física (social engineering walkthrough) coordinado con el equipo de red team.

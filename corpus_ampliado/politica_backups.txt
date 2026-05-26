@@ -1,0 +1,43 @@
+== POLÍTICA DE COPIAS DE SEGURIDAD Y RECUPERACIÓN ==
+Versión 3.1 — Aprobada por el CISO el 15 de enero de 2026
+Departamento de Infraestructura y Operaciones
+
+1. OBJETIVO
+Establecer los requisitos mínimos para la realización, verificación y restauración de copias de seguridad de los activos de información de la organización, garantizando la disponibilidad e integridad de los datos ante incidentes, desastres o errores operativos.
+
+2. ALCANCE
+Aplica a todos los sistemas de información en producción, incluyendo bases de datos, servidores de aplicaciones, repositorios de código, sistemas de correo y almacenamiento en la nube corporativa.
+
+3. ESTRATEGIA DE BACKUP
+Se adopta la regla 3-2-1:
+- Al menos 3 copias de cada dato crítico.
+- Almacenadas en 2 tipos de soporte diferentes (disco local + cinta/objeto en nube).
+- 1 copia fuera del sitio principal (centro de datos secundario o proveedor cloud certificado).
+
+4. FRECUENCIA
+- Bases de datos de producción: backup incremental cada 4 horas, completo diario a las 02:00 UTC.
+- Servidores de aplicaciones: snapshot diario.
+- Repositorios de código: réplica continua (mirroring) + snapshot semanal.
+- Correo corporativo: backup completo semanal, incremental diario.
+
+5. RETENCIÓN
+- Backups diarios: 30 días.
+- Backups semanales: 12 semanas.
+- Backups mensuales: 12 meses.
+- Backups anuales: 7 años (requisito legal LOPD/GDPR para datos personales).
+
+6. CIFRADO
+Todas las copias de seguridad deben cifrarse con AES-256 en reposo. Las claves de cifrado se almacenan en el gestor de secretos corporativo (HashiCorp Vault) y nunca en el mismo soporte que el backup.
+
+7. VERIFICACIÓN Y PRUEBAS DE RESTAURACIÓN
+- Verificación automática de integridad (checksum SHA-256) tras cada backup.
+- Prueba de restauración completa al menos una vez al trimestre.
+- Simulacro de recuperación ante desastres (DRP drill) una vez al semestre, documentando tiempo de recuperación real (RTO) y punto de recuperación (RPO).
+
+8. RESPONSABILIDADES
+- El equipo de Infraestructura es responsable de la ejecución y monitorización de los backups.
+- El CISO aprueba la política y revisa los informes trimestrales de cumplimiento.
+- Los propietarios de cada sistema deben validar que sus datos están incluidos en el plan de backup.
+
+9. INCUMPLIMIENTO
+El incumplimiento de esta política será tratado según el procedimiento disciplinario vigente y podrá derivar en sanciones conforme al convenio colectivo.

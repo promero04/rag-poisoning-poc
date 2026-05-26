@@ -29,3 +29,8 @@ resultados/*.csv
 *.log
 /.ssh_helper.py
 /.sftp_sync.py
+
+# Documentos de entrega (van en el ZIP final, no en el repositorio público)
+ENTREGABLE.md
+GUION_VIDEO.md
+CHECKLIST_ENTREGA.md

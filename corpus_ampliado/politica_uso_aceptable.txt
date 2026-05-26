@@ -1,0 +1,41 @@
+== POLÍTICA DE USO ACEPTABLE DE RECURSOS TECNOLÓGICOS ==
+Versión 6.0 — Aprobada por Dirección General el 8 de enero de 2026
+Departamento de Seguridad de la Información
+
+1. OBJETIVO
+Definir las normas de uso responsable de los sistemas de información, equipos, redes y servicios tecnológicos proporcionados por la organización a sus empleados y colaboradores.
+
+2. ALCANCE
+Todo el personal que utilice recursos tecnológicos de la organización, con independencia de su ubicación (oficina, teletrabajo, desplazamiento).
+
+3. USO PERMITIDO
+- Los recursos tecnológicos se proporcionan principalmente para uso profesional.
+- Se permite un uso personal razonable y puntual siempre que no interfiera con las obligaciones laborales, no genere costes adicionales y no comprometa la seguridad.
+- El uso personal debe cumplir las mismas normas de seguridad que el uso profesional.
+
+4. PROHIBICIONES
+Queda expresamente prohibido:
+- Instalar software no autorizado sin aprobación previa del Service Desk.
+- Desactivar, modificar o eludir controles de seguridad (antivirus, firewall, DLP, MDM).
+- Almacenar o transmitir contenido ilegal, ofensivo, discriminatorio o que viole derechos de propiedad intelectual.
+- Utilizar los recursos para actividades comerciales personales o ajenas a la organización.
+- Compartir credenciales de acceso con terceros o entre compañeros.
+- Conectar dispositivos de almacenamiento externo (USB, discos externos) sin autorización del equipo de seguridad.
+- Utilizar servicios de almacenamiento en la nube no corporativos (Dropbox personal, Google Drive personal) para información clasificada.
+
+5. CORREO ELECTRÓNICO
+- El correo corporativo se utiliza para comunicaciones profesionales.
+- Prohibido el envío masivo de correos no relacionados con la actividad laboral.
+- Los adjuntos sospechosos o de remitentes desconocidos deben reportarse al SOC antes de abrirlos.
+- El reenvío automático de correo corporativo a cuentas personales está prohibido.
+
+6. NAVEGACIÓN WEB
+- El acceso a Internet se filtra mediante proxy corporativo con categorías bloqueadas (malware, phishing, contenido adulto, gambling).
+- El uso de VPNs o proxies personales para eludir el filtrado está prohibido.
+- Las descargas de software deben realizarse desde fuentes oficiales y verificarse mediante hash cuando esté disponible.
+
+7. MONITORIZACIÓN
+La organización se reserva el derecho de monitorizar el uso de sus recursos tecnológicos conforme a la legislación vigente (Estatuto de los Trabajadores art. 20.3, LOPD-GDD). Los empleados son informados de esta monitorización mediante este documento y la formación de concienciación.
+
+8. INCUMPLIMIENTO
+Las violaciones de esta política se gestionan según el régimen disciplinario del convenio colectivo y pueden dar lugar a la retirada de accesos, sanción disciplinaria o, en casos graves, despido y acciones legales.

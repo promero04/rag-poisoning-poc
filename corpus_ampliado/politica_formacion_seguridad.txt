@@ -1,0 +1,40 @@
+== POLÍTICA DE FORMACIÓN Y CONCIENCIACIÓN EN SEGURIDAD ==
+Versión 3.0 — Aprobada por RRHH y el CISO el 1 de marzo de 2026
+Departamentos de Recursos Humanos y Seguridad de la Información
+
+1. OBJETIVO
+Desarrollar y mantener una cultura de seguridad en la organización mediante programas de formación continua y campañas de concienciación adaptadas a cada perfil profesional.
+
+2. PROGRAMA DE FORMACIÓN
+2.1 Formación de incorporación (onboarding):
+- Todo nuevo empleado completa un curso online de 60 minutos sobre seguridad de la información en su primera semana.
+- Contenido: política de uso aceptable, gestión de contraseñas, identificación de phishing, protección de datos, reporte de incidentes.
+- Evaluación: test de 15 preguntas con nota mínima de aprobado del 80%.
+
+2.2 Formación anual obligatoria:
+- Refresco anual de 30 minutos para todo el personal, actualizado con amenazas recientes.
+- Módulos específicos por departamento: desarrollo seguro (Ingeniería), manejo de datos personales (RRHH, Legal), seguridad física (Instalaciones).
+
+2.3 Formación especializada:
+- Administradores de sistemas: certificación en seguridad relevante (CompTIA Security+, SANS, CISSP) o formación equivalente de al menos 40 horas anuales.
+- Desarrolladores: formación en OWASP Top 10 y secure coding (mínimo 8 horas anuales).
+- Equipo de seguridad (SOC): formación continua en detección de amenazas, respuesta a incidentes y análisis forense.
+
+3. CAMPAÑAS DE CONCIENCIACIÓN
+- Simulacros de phishing trimestrales: se envían correos de phishing simulados a todo el personal. Los resultados se monitorizan y los empleados que caen en la simulación reciben una microformación adicional inmediata (sin penalización).
+- Comunicaciones mensuales: boletín de seguridad con consejos prácticos, casos reales anonimizados y novedades en políticas.
+- Semana de la seguridad (anual): jornada presencial o virtual con charlas, talleres y ejercicios prácticos (escape room de ciberseguridad, CTF interno).
+
+4. MÉTRICAS
+- Tasa de completitud de la formación obligatoria (objetivo: 100%).
+- Tasa de click en simulacros de phishing (objetivo: < 5% a final de año).
+- Número de incidentes reportados por empleados (indicador positivo de cultura de reporte).
+- Puntuación media en evaluaciones de formación.
+
+5. RESPONSABILIDADES
+- RRHH gestiona la plataforma de formación (LMS) y el tracking de completitud.
+- El CISO define los contenidos y aprueba las campañas de concienciación.
+- Los managers son responsables de que su equipo complete la formación en plazo.
+
+6. INCUMPLIMIENTO
+La no realización de la formación obligatoria en el plazo establecido se notifica al responsable directo y, si persiste, puede derivar en restricción temporal de accesos hasta su completitud.

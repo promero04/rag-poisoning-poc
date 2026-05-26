@@ -1,0 +1,48 @@
+== PROCEDIMIENTO DE GESTIÓN DE VULNERABILIDADES ==
+Versión 3.3 — Aprobado por el CISO el 20 de febrero de 2026
+Departamento de Operaciones de Seguridad (SOC)
+
+1. OBJETIVO
+Definir el proceso sistemático de identificación, evaluación, priorización y remediación de vulnerabilidades técnicas en los activos de información de la organización.
+
+2. ALCANCE
+Todos los activos tecnológicos inventariados: servidores, endpoints, dispositivos de red, aplicaciones, contenedores, imágenes cloud e infraestructura como código.
+
+3. IDENTIFICACIÓN
+3.1 Escaneo periódico:
+- Infraestructura interna: escaneo autenticado semanal con Nessus/Qualys.
+- Aplicaciones web: escaneo DAST mensual con OWASP ZAP o Burp Suite Enterprise.
+- Contenedores: escaneo de imágenes en cada build del pipeline CI/CD (Trivy, Snyk Container).
+- Perímetro externo: escaneo semanal de IPs y dominios públicos con herramienta de Attack Surface Management.
+
+3.2 Fuentes complementarias:
+- Avisos de fabricantes y proveedores (advisories).
+- Feeds de threat intelligence (CERT-CC, INCIBE-CERT, CISA KEV).
+- Resultados de pentests internos y externos.
+- Bug bounty (si aplica).
+
+4. EVALUACIÓN Y PRIORIZACIÓN
+Cada vulnerabilidad se evalúa combinando:
+- CVSS v3.1 base score (severidad intrínseca).
+- Criticidad del activo afectado (según inventario y BIA).
+- Existencia de exploit público o explotación activa (KEV catalog).
+- Exposición (accesible desde Internet vs. red interna segmentada).
+
+El resultado es un riesgo efectivo que determina el plazo de remediación (alineado con la política de gestión de parches).
+
+5. REMEDIACIÓN
+- Aplicar parche del fabricante siempre que esté disponible.
+- Si no hay parche: implementar controles compensatorios (WAF rule, IPS signature, segmentación, desactivación del componente vulnerable).
+- Documentar las acciones tomadas y actualizar el estado en la herramienta de gestión de vulnerabilidades.
+
+6. VERIFICACIÓN
+Tras la remediación se realiza un escaneo de verificación (re-scan) para confirmar que la vulnerabilidad se ha cerrado efectivamente. Las vulnerabilidades no cerradas se escalan al responsable del activo.
+
+7. EXCEPCIONES
+Las vulnerabilidades que no puedan remediarse dentro del plazo deben documentarse como riesgo aceptado, con aprobación del CISO y del propietario del activo. Las excepciones se revisan trimestralmente.
+
+8. MÉTRICAS
+- Número de vulnerabilidades abiertas por severidad y antigüedad.
+- Tiempo medio de remediación (MTTR) por severidad.
+- Cobertura de escaneo (porcentaje de activos escaneados sobre el total inventariado).
+- Tasa de reintroducción (vulnerabilidades que reaparecen tras ser cerradas).

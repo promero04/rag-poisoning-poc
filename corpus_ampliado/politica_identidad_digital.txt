@@ -1,0 +1,39 @@
+== POLÍTICA DE GESTIÓN DE IDENTIDADES Y ACCESOS (IAM) ==
+Versión 4.0 — Aprobada por el CISO el 30 de enero de 2026
+Departamento de Seguridad de la Información
+
+1. OBJETIVO
+Definir los principios y controles para la gestión del ciclo de vida de las identidades digitales y los accesos a los sistemas de información, garantizando que cada usuario tenga los permisos estrictamente necesarios para desempeñar sus funciones.
+
+2. PRINCIPIOS
+- Mínimo privilegio: cada identidad recibe únicamente los permisos necesarios para su rol.
+- Separación de funciones: las tareas críticas requieren la intervención de al menos dos personas con roles distintos.
+- Need-to-know: el acceso a información clasificada se concede solo a quienes la necesiten para su trabajo.
+- Responsabilidad individual: cada acción en los sistemas debe ser trazable a una identidad única.
+
+3. TIPOS DE IDENTIDAD
+3.1 Cuentas de usuario estándar: empleados y contratistas con acceso a aplicaciones corporativas según su perfil RBAC.
+3.2 Cuentas privilegiadas: administradores de sistemas, DBA, operadores de red. Gestionadas obligatoriamente a través de PAM (CyberArk / BeyondTrust) con grabación de sesión.
+3.3 Cuentas de servicio: procesos automatizados, integraciones API. Sin acceso interactivo, con credenciales rotadas automáticamente cada 90 días.
+3.4 Cuentas de emergencia (break-glass): para acceso en situaciones de crisis. Almacenadas en sobre sellado en caja fuerte, uso registrado y auditado.
+
+4. AUTENTICACIÓN
+- MFA obligatoria para todos los accesos a sistemas internos y SaaS corporativo.
+- Factores aceptados: TOTP (app autenticador), clave de seguridad FIDO2/WebAuthn, notificación push (con number matching).
+- SMS como segundo factor: prohibido para cuentas privilegiadas, desaconsejado para el resto.
+- Passwordless (FIDO2 + biometría) como objetivo estratégico para 2027.
+
+5. AUTORIZACIÓN — MODELO RBAC
+- Los roles se definen a nivel organizativo y se mapean a perfiles de acceso en cada aplicación.
+- Todo acceso fuera del perfil de rol estándar requiere solicitud justificada, aprobación del responsable y revisión del equipo de seguridad.
+- Los accesos temporales (proyectos, guardias) se conceden con fecha de expiración automática.
+
+6. REVISIÓN DE ACCESOS
+- Revisión trimestral de accesos privilegiados por parte de los propietarios de los sistemas.
+- Revisión semestral de accesos estándar por parte de los responsables de departamento.
+- Revocación automática de accesos no confirmados en la revisión.
+
+7. FEDERACIÓN Y SSO
+- SSO obligatorio para todas las aplicaciones SaaS que lo soporten, integrado con el IdP corporativo.
+- Protocolos: SAML 2.0 u OIDC (OpenID Connect). Prohibido el uso de autenticación local en aplicaciones que soporten federación.
+- Provisioning y deprovisioning automatizados vía SCIM donde el proveedor lo soporte.

@@ -1,0 +1,39 @@
+== POLÍTICA DE SEGURIDAD DE REDES INALÁMBRICAS ==
+Versión 2.0 — Aprobada por el CISO el 10 de marzo de 2026
+Departamento de Infraestructura de Red
+
+1. OBJETIVO
+Regular la configuración, el acceso y la monitorización de las redes Wi-Fi corporativas para prevenir accesos no autorizados, interceptación de tráfico y ataques de tipo rogue AP.
+
+2. REDES DEFINIDAS
+La organización mantiene tres redes inalámbricas segregadas:
+
+| Red | SSID | Propósito | Autenticación |
+|-----|------|-----------|---------------|
+| Corporativa | CORP-SECURE | Acceso a recursos internos | WPA3-Enterprise (802.1X + RADIUS + certificado de dispositivo) |
+| Invitados | GUEST | Acceso a Internet aislado | Portal cautivo con credenciales temporales (validez 24h) |
+| IoT | IOT-MGMT | Dispositivos IoT corporativos | WPA3-Personal con PSK rotada trimestralmente, VLAN aislada |
+
+3. CONFIGURACIÓN DE PUNTOS DE ACCESO
+- Protocolo mínimo: WPA3. WPA2-Enterprise se acepta únicamente para dispositivos legacy con excepción documentada.
+- WEP y WPA (primera generación) están prohibidos en cualquier circunstancia.
+- SSID corporativo: oculto (no broadcast). Los dispositivos gestionados lo tienen preconfigurado via MDM.
+- Gestión centralizada de APs mediante controladora (Cisco WLC / Aruba Central).
+- Firmware actualizado según la política de gestión de parches.
+
+4. SEGMENTACIÓN
+- La red de invitados NO tiene acceso a la red corporativa ni a la red IoT. El tráfico se enruta directamente a Internet a través de una VLAN dedicada con firewall restrictivo.
+- La red IoT está aislada en su propia VLAN y sólo puede comunicarse con el servidor de gestión IoT via reglas de firewall específicas.
+
+5. DETECCIÓN DE AMENAZAS
+- WIDS/WIPS (Wireless Intrusion Detection/Prevention System) activo para detectar: APs no autorizados (rogue APs), ataques de deautenticación, evil twin y clientes no gestionados en la red corporativa.
+- Las alertas se envían al SOC para triaje inmediato.
+
+6. ACCESO DE VISITANTES
+- Las credenciales de invitados se generan en recepción con validez máxima de 24 horas.
+- El ancho de banda para invitados está limitado a 10 Mbps por dispositivo.
+- Prohibido el acceso a servicios P2P, VPN personales y streaming de vídeo desde la red de invitados.
+
+7. AUDITORÍA
+- Escaneo trimestral de redes inalámbricas para detectar APs no autorizados conectados a la red cableada.
+- Revisión semestral de la lista de dispositivos autorizados en la red corporativa.

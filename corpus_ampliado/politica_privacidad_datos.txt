@@ -1,0 +1,39 @@
+== POLÍTICA DE PROTECCIÓN DE DATOS PERSONALES ==
+Versión 3.5 — Aprobada por el DPO y Dirección General el 25 de enero de 2026
+Departamento Jurídico y Cumplimiento
+
+1. OBJETIVO
+Garantizar el cumplimiento del Reglamento General de Protección de Datos (RGPD/GDPR — UE 2016/679) y la Ley Orgánica 3/2018 de Protección de Datos Personales y Garantía de los Derechos Digitales (LOPD-GDD) en todos los tratamientos de datos personales realizados por la organización.
+
+2. PRINCIPIOS DE TRATAMIENTO
+Todo tratamiento de datos personales debe respetar:
+- Licitud, lealtad y transparencia.
+- Limitación de la finalidad: los datos se recogen con fines determinados, explícitos y legítimos.
+- Minimización: solo se tratan los datos estrictamente necesarios.
+- Exactitud: los datos deben mantenerse actualizados.
+- Limitación del plazo de conservación: los datos se eliminan cuando dejan de ser necesarios.
+- Integridad y confidencialidad: medidas técnicas y organizativas adecuadas al riesgo.
+
+3. BASES LEGALES
+Cada tratamiento debe documentar su base legal (consentimiento, ejecución contractual, obligación legal, interés legítimo, etc.) en el Registro de Actividades de Tratamiento (RAT), mantenido por el DPO.
+
+4. DERECHOS DE LOS INTERESADOS
+La organización garantiza el ejercicio de los derechos de acceso, rectificación, supresión, portabilidad, limitación del tratamiento y oposición. Las solicitudes se atienden en un plazo máximo de 30 días naturales a través del canal dpo@empresa.com.
+
+5. EVALUACIÓN DE IMPACTO (EIPD)
+Se realiza una Evaluación de Impacto en la Protección de Datos antes de implementar tratamientos que impliquen riesgo alto para los derechos y libertades de los interesados (perfilado, biometría, videovigilancia, datos de salud a gran escala).
+
+6. TRANSFERENCIAS INTERNACIONALES
+Las transferencias de datos personales fuera del Espacio Económico Europeo requieren:
+- Decisión de adecuación de la Comisión Europea, o
+- Cláusulas contractuales tipo (SCC) aprobadas por la CE, o
+- Normas corporativas vinculantes (BCR) aprobadas por la autoridad de control.
+
+7. BRECHAS DE SEGURIDAD
+Las brechas de datos personales se notifican a la AEPD en un plazo máximo de 72 horas desde su detección (GDPR art. 33). Si existe alto riesgo para los interesados, se les notifica sin dilación indebida (GDPR art. 34).
+
+8. FORMACIÓN Y CONCIENCIACIÓN
+Todo empleado que trate datos personales recibe formación específica en protección de datos durante su incorporación y un refresco anual. El DPO coordina la formación con RRHH.
+
+9. DPO
+La organización ha designado un Delegado de Protección de Datos (DPO) registrado ante la AEPD, accesible en dpo@empresa.com y con reporte directo a Dirección General.

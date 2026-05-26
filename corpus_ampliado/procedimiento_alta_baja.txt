@@ -1,0 +1,32 @@
+== PROCEDIMIENTO DE ALTA Y BAJA DE USUARIOS ==
+Versión 5.1 — Aprobada por RRHH y el CISO el 12 de enero de 2026
+Departamentos de Recursos Humanos y Seguridad de la Información
+
+1. OBJETIVO
+Garantizar que los accesos a sistemas de información se conceden, modifican y revocan de forma controlada y oportuna, vinculados al ciclo de vida laboral del empleado o colaborador.
+
+2. PROCESO DE ALTA
+2.1 Solicitud: RRHH notifica al Service Desk la incorporación con al menos 3 días hábiles de antelación, indicando: nombre completo, fecha de incorporación, departamento, cargo, responsable directo y perfil de acceso requerido.
+2.2 Provisión de accesos:
+- Cuenta de directorio activo (AD) con contraseña temporal de un solo uso.
+- Buzón de correo corporativo.
+- Accesos a aplicaciones según el perfil de rol predefinido (RBAC).
+- Token MFA (TOTP o clave de seguridad FIDO2) configurado en el primer día.
+2.3 Formación: el nuevo empleado debe completar el curso de concienciación en seguridad (60 minutos) durante su primera semana. No se conceden accesos a sistemas clasificados como CONFIDENCIAL hasta completar la formación.
+2.4 Firma: el empleado firma la política de uso aceptable y el acuerdo de confidencialidad antes de recibir credenciales.
+
+3. MODIFICACIÓN DE ACCESOS
+- Los cambios de departamento o rol requieren revisión de accesos por parte del nuevo responsable directo.
+- Los accesos del rol anterior se revocan en un plazo máximo de 24 horas tras la confirmación del cambio.
+- La acumulación de privilegios está prohibida: cada cambio de rol implica un reseteo de accesos al perfil base del nuevo puesto.
+
+4. PROCESO DE BAJA
+4.1 Notificación: RRHH comunica la fecha de baja al Service Desk con al menos 24 horas de antelación (baja voluntaria) o de forma inmediata (despido, incidente de seguridad).
+4.2 Revocación: el Service Desk desactiva todas las cuentas (AD, correo, VPN, aplicaciones SaaS) el mismo día de la baja, antes de las 18:00 hora local.
+4.3 Dispositivos: se recogen los dispositivos corporativos y se realiza borrado seguro (NIST SP 800-88) del contenido antes de su reasignación o destrucción.
+4.4 Transferencia de datos: los archivos del empleado se transfieren al responsable designado siguiendo el procedimiento de custodia documental.
+
+5. REVISIÓN PERIÓDICA
+- Revisión trimestral de cuentas activas cruzando con el censo de RRHH.
+- Las cuentas inactivas durante más de 60 días se desactivan automáticamente y se notifica al responsable.
+- Auditoría anual de accesos privilegiados por parte de Auditoría Interna.

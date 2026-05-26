@@ -1,0 +1,38 @@
+== POLÍTICA DE ACCESO REMOTO Y VPN ==
+Versión 3.1 — Aprobada por el CISO el 5 de marzo de 2026
+Departamento de Infraestructura de Red
+
+1. OBJETIVO
+Establecer los requisitos de seguridad para el acceso remoto a la red corporativa mediante VPN (Virtual Private Network), garantizando la confidencialidad e integridad del tráfico y la autenticación robusta de los usuarios.
+
+2. ALCANCE
+Todo empleado, contratista o colaborador que acceda a recursos internos de la organización desde fuera del perímetro de red corporativo (teletrabajo, viajes, sedes remotas).
+
+3. SOLUCIÓN VPN
+- Tecnología: VPN SSL/TLS (GlobalProtect / Cisco AnyConnect) con tunnel completo (full tunnel) como configuración por defecto.
+- Split tunnel permitido únicamente para el tráfico a servicios SaaS corporativos preaprobados (Microsoft 365, Salesforce), siempre que el endpoint tenga EDR activo.
+- Protocolo: TLS 1.3 preferente, TLS 1.2 como mínimo. Cifrado AES-256-GCM.
+
+4. AUTENTICACIÓN
+- MFA obligatoria: factor 1 = credenciales de directorio activo, factor 2 = TOTP o clave de seguridad FIDO2.
+- Certificado de dispositivo (emitido por la PKI corporativa) requerido adicionalmente para accesos desde equipos no gestionados.
+- Sesiones VPN con timeout de inactividad de 30 minutos y duración máxima de 12 horas. Tras ese periodo se requiere reautenticación.
+
+5. POSTURA DEL ENDPOINT
+Antes de establecer la conexión VPN, el agente verifica:
+- Sistema operativo con parches al día (según política de gestión de parches).
+- EDR (Endpoint Detection and Response) activo y con firmas actualizadas.
+- Firewall del sistema operativo habilitado.
+- Disco cifrado.
+Si alguna condición falla, el acceso se limita a un portal de remediación donde el usuario puede actualizar su equipo.
+
+6. RESTRICCIONES
+- Prohibido el uso de VPNs personales o de terceros para acceder a recursos corporativos.
+- Prohibido compartir la conexión VPN (tethering) con dispositivos no gestionados.
+- El acceso VPN desde redes Wi-Fi públicas (aeropuertos, cafeterías, hoteles) está permitido siempre que el tunnel sea completo (full tunnel).
+
+7. LOGGING
+Todas las sesiones VPN se registran con: identidad del usuario, IP de origen, duración, volumen de datos y destinos accedidos. Los logs se remiten al SIEM con retención de 12 meses.
+
+8. REVOCACIÓN
+El acceso VPN se desactiva simultáneamente a la baja del empleado (según procedimiento de alta/baja) y puede suspenderse cautelarmente durante una investigación de seguridad.

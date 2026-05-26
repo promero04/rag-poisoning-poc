@@ -1,0 +1,34 @@
+== POLÍTICA DE SEGURIDAD DEL CORREO ELECTRÓNICO ==
+Versión 3.2 — Aprobada por el CISO el 18 de febrero de 2026
+Departamento de Seguridad de la Información
+
+1. OBJETIVO
+Proteger la confidencialidad, integridad y disponibilidad de las comunicaciones por correo electrónico corporativo, mitigando riesgos de phishing, fuga de datos y suplantación de identidad.
+
+2. INFRAESTRUCTURA DE CORREO
+- Plataforma: Microsoft 365 / Exchange Online con licenciamiento E5 (incluye Defender for Office 365).
+- Dominio principal: @empresa.com con registros SPF, DKIM y DMARC (policy=reject) configurados.
+- Retención: 5 años para buzones activos, 7 años para buzones de archivo (requisito legal).
+
+3. AUTENTICACIÓN
+- El acceso al correo requiere MFA obligatoria (TOTP o clave FIDO2).
+- Las sesiones de correo web expiran tras 8 horas de inactividad.
+- El acceso desde dispositivos no gestionados (no registrados en MDM) está restringido a la interfaz web sin posibilidad de descarga de adjuntos.
+
+4. PROTECCIÓN ANTIPHISHING
+- Defender for Office 365 analiza todos los mensajes entrantes con: sandbox de adjuntos (Safe Attachments), reescritura y verificación de URLs (Safe Links), detección de suplantación de identidad y análisis heurístico.
+- Los mensajes externos se marcan con banner amarillo: "Este mensaje procede de fuera de la organización. Tenga precaución con enlaces y adjuntos."
+- Los correos que contengan macros en adjuntos Office se ponen en cuarentena automáticamente para revisión del SOC.
+
+5. CLASIFICACIÓN Y DLP
+- Los correos que contengan datos clasificados como CONFIDENCIAL deben cifrarse con S/MIME o Azure Information Protection.
+- Las políticas DLP (Data Loss Prevention) bloquean el envío de información sensible (números de tarjeta, DNI, datos médicos) a destinatarios externos no autorizados.
+- Los empleados pueden solicitar excepciones DLP justificadas al equipo de seguridad.
+
+6. LISTAS DE DISTRIBUCIÓN Y CORREO MASIVO
+- La creación de listas de distribución requiere aprobación del propietario del grupo y del Service Desk.
+- El envío masivo (más de 100 destinatarios) requiere autorización de Comunicación Interna.
+- Prohibido el uso de listas de distribución para contenido no profesional.
+
+7. INCIDENTES
+Los empleados deben reportar correos sospechosos usando el botón "Report Phishing" integrado en Outlook. El SOC triagea los reportes en un plazo máximo de 30 minutos durante horario laboral.

@@ -1,0 +1,38 @@
+== PROCEDIMIENTO DE AUDITORÍA DE SEGURIDAD ==
+Versión 4.0 — Aprobada por Dirección General el 10 de febrero de 2026
+Departamento de Auditoría Interna y Cumplimiento
+
+1. OBJETIVO
+Definir el proceso de auditoría periódica de los controles de seguridad de la información, asegurando el cumplimiento del SGSI (Sistema de Gestión de Seguridad de la Información) conforme a ISO/IEC 27001:2022.
+
+2. TIPOS DE AUDITORÍA
+- Auditoría interna programada: planificada anualmente según el calendario de auditorías aprobado por el Comité de Seguridad.
+- Auditoría interna no programada: solicitada por el CISO o la Dirección ante incidentes, cambios significativos en la infraestructura o sospechas de incumplimiento.
+- Auditoría externa: realizada por entidad certificadora acreditada para la renovación o mantenimiento de la certificación ISO 27001.
+
+3. PLANIFICACIÓN
+El plan anual de auditorías debe cubrir al menos:
+- Todos los controles del Anexo A de ISO 27001 en un ciclo de 3 años.
+- Controles críticos (gestión de accesos, cifrado, gestión de incidentes) auditados cada año.
+- Nuevos controles implantados desde la última auditoría.
+
+4. EJECUCIÓN
+- El equipo auditor debe ser independiente del área auditada.
+- Se recopilan evidencias mediante entrevistas, revisión documental, inspección técnica y muestreo de registros.
+- Las no conformidades se clasifican en: Mayores (riesgo alto, requieren plan de acción inmediato), Menores (riesgo medio, plazo de corrección de 90 días) y Observaciones (mejoras recomendadas sin plazo obligatorio).
+
+5. INFORME DE AUDITORÍA
+El informe incluye:
+- Alcance y objetivos de la auditoría.
+- Metodología empleada.
+- Hallazgos clasificados por severidad.
+- Conclusión sobre el nivel de conformidad.
+- Anexo de evidencias referenciadas.
+
+6. SEGUIMIENTO
+- Las no conformidades mayores requieren plan de acción correctiva en un plazo de 15 días hábiles.
+- El auditor líder verifica la eficacia de las acciones correctivas en la siguiente revisión trimestral.
+- Los resultados se presentan al Comité de Seguridad y quedan registrados en el repositorio documental del SGSI.
+
+7. CONFIDENCIALIDAD
+Los informes de auditoría se clasifican como CONFIDENCIAL y su distribución se limita al CISO, la Dirección General y los responsables de las áreas auditadas.

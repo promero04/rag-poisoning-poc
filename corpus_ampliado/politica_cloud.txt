@@ -1,0 +1,39 @@
+== POLÍTICA DE SEGURIDAD EN ENTORNOS CLOUD ==
+Versión 2.1 — Aprobada por el CISO el 14 de febrero de 2026
+Departamento de Infraestructura Cloud
+
+1. OBJETIVO
+Establecer los requisitos de seguridad para el uso de servicios de computación en la nube (IaaS, PaaS, SaaS), garantizando la protección de los datos y la conformidad regulatoria.
+
+2. ALCANCE
+Todos los servicios cloud contratados por la organización, incluyendo AWS, Azure, Google Cloud y aplicaciones SaaS corporativas (Microsoft 365, Salesforce, ServiceNow, etc.).
+
+3. SELECCIÓN DE PROVEEDORES
+Antes de contratar un servicio cloud, el proveedor debe:
+- Disponer de certificación ISO 27001 o SOC 2 Type II vigente.
+- Ofrecer residencia de datos dentro del Espacio Económico Europeo (o con garantías contractuales equivalentes).
+- Aceptar las cláusulas de seguridad del Anexo de Tratamiento de Datos de la organización.
+- Pasar la evaluación de riesgos de terceros del departamento de Compras y Seguridad.
+
+4. GESTIÓN DE IDENTIDADES Y ACCESOS
+- SSO (Single Sign-On) obligatorio para toda aplicación SaaS que lo soporte, integrado con el IdP corporativo (Azure AD / Okta).
+- MFA obligatoria para accesos administrativos y recomendada para todos los usuarios.
+- Revisión trimestral de accesos y roles en cada servicio cloud.
+- Cuentas de servicio (service accounts) con rotación de credenciales cada 90 días y sin permisos interactivos.
+
+5. CONFIGURACIÓN SEGURA
+- Aplicar los benchmarks CIS (Center for Internet Security) como línea base de configuración para IaaS/PaaS.
+- Escaneo continuo de configuración (CSPM — Cloud Security Posture Management) con alertas automáticas ante desviaciones.
+- Recursos expuestos a Internet requieren aprobación explícita del equipo de seguridad.
+- Cifrado en tránsito (TLS 1.2 mínimo) y en reposo (AES-256 o equivalente) obligatorio para todos los servicios.
+
+6. LOGGING Y MONITORIZACIÓN
+- Activar cloud trail / activity logs en todas las cuentas y proyectos.
+- Los logs se centralizan en el SIEM corporativo con retención mínima de 12 meses.
+- Alertas configuradas para: creación de usuarios admin, cambios en políticas IAM, desactivación de logging, acceso desde geolocalizaciones inusuales.
+
+7. RESPUESTA A INCIDENTES
+Los incidentes en entornos cloud se gestionan según el procedimiento general de gestión de incidentes, con la particularidad de que el equipo de seguridad cloud coordina con el soporte del proveedor cuando sea necesario.
+
+8. SALIDA Y PORTABILIDAD
+El contrato con todo proveedor cloud debe incluir cláusulas de portabilidad de datos y eliminación certificada al finalizar la relación. Se realizan pruebas de exportación de datos al menos una vez al año.

@@ -1,0 +1,33 @@
+== POLÍTICA DE USO DE DISPOSITIVOS PERSONALES (BYOD) ==
+Versión 2.0 — Aprobada por el Comité de Seguridad el 3 de marzo de 2026
+Departamento de Seguridad de la Información
+
+1. OBJETIVO
+Regular el uso de dispositivos personales (portátiles, smartphones, tablets) para acceder a recursos corporativos, equilibrando la productividad del empleado con la protección de los activos de información.
+
+2. ALCANCE
+Aplica a todo el personal (empleados, contratistas, becarios) que desee utilizar dispositivos de su propiedad para acceder al correo, aplicaciones internas o repositorios de la organización.
+
+3. REQUISITOS DEL DISPOSITIVO
+Para autorizar un dispositivo personal se deben cumplir las siguientes condiciones:
+- Sistema operativo actualizado a la última versión estable (o como máximo una versión anterior con parches de seguridad al día).
+- Disco cifrado con cifrado nativo del sistema operativo (BitLocker, FileVault, LUKS).
+- Antimalware activo con actualizaciones automáticas habilitadas.
+- Bloqueo de pantalla con PIN de al menos 6 dígitos, patrón complejo o biometría.
+- No tener root/jailbreak aplicado.
+
+4. REGISTRO Y GESTIÓN
+- Todo dispositivo BYOD debe registrarse en la plataforma MDM (Mobile Device Management) corporativa antes de acceder a recursos internos.
+- El MDM podrá aplicar políticas de seguridad remotas: borrado selectivo de datos corporativos, imposición de cifrado y restricción de aplicaciones no autorizadas.
+- El empleado conserva la propiedad del dispositivo; la organización solo gestiona el contenedor corporativo.
+
+5. ACCESO A RECURSOS
+- El acceso desde dispositivos BYOD se realiza exclusivamente a través de la VPN corporativa o del portal de acceso condicional (Zero Trust).
+- No está permitido almacenar datos clasificados como CONFIDENCIAL o SECRETO en dispositivos personales sin autorización expresa del CISO.
+- El correo corporativo debe accederse a través de la app de correo gestionada (Outlook con protección Intune o equivalente).
+
+6. PÉRDIDA O ROBO
+El empleado debe notificar la pérdida o robo del dispositivo al Service Desk en un plazo máximo de 2 horas. El equipo de seguridad activará el borrado remoto del contenedor corporativo.
+
+7. DESVINCULACIÓN
+Cuando el empleado abandone la organización o deje de utilizar el dispositivo para fines corporativos, se realizará un borrado selectivo del contenedor corporativo y se eliminará el registro del MDM.

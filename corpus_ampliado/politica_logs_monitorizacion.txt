@@ -1,0 +1,44 @@
+== POLÍTICA DE LOGGING Y MONITORIZACIÓN DE SEGURIDAD ==
+Versión 2.4 — Aprobada por el CISO el 28 de enero de 2026
+Departamento de Operaciones de Seguridad (SOC)
+
+1. OBJETIVO
+Definir los requisitos de generación, almacenamiento, protección y análisis de registros de actividad (logs) para la detección de incidentes, la investigación forense y el cumplimiento normativo.
+
+2. FUENTES DE LOGS
+Todos los siguientes activos deben generar y remitir logs al SIEM corporativo:
+- Servidores (eventos de sistema, autenticación, errores).
+- Firewalls y dispositivos de red (conexiones, reglas disparadas, VPN).
+- Aplicaciones web y APIs (accesos, errores HTTP 4xx/5xx, cambios de datos).
+- Bases de datos (conexiones, queries privilegiadas, cambios de esquema).
+- Endpoints (eventos de EDR, instalaciones de software, cambios de configuración).
+- Servicios cloud (cloud trail, activity logs, cambios IAM).
+
+3. FORMATO Y CONTENIDO
+Cada registro debe incluir como mínimo:
+- Marca temporal en UTC con precisión de milisegundos (ISO 8601).
+- Identificador del sistema origen.
+- Tipo de evento (autenticación, autorización, error, cambio de configuración).
+- Identidad del actor (usuario, cuenta de servicio, IP de origen).
+- Resultado de la acción (éxito, fallo, bloqueado).
+- Detalles adicionales relevantes (recurso accedido, parámetros de la operación).
+
+4. RETENCIÓN
+- Logs de seguridad (autenticación, firewall, IDS/IPS): 12 meses online + 24 meses en archivo.
+- Logs de aplicación: 6 meses online + 12 meses en archivo.
+- Logs de auditoría (cambios en configuración, accesos privilegiados): 36 meses.
+- Los plazos pueden extenderse por requisito legal o durante investigaciones activas.
+
+5. PROTECCIÓN
+- Los logs se transmiten cifrados (TLS 1.2+) al SIEM.
+- Los logs almacenados son inmutables: se aplica WORM (Write Once Read Many) o firma digital para evitar manipulación.
+- El acceso a los logs está restringido al equipo del SOC y a auditores autorizados.
+- Queda prohibido almacenar contraseñas, tokens de sesión o datos personales sensibles en logs.
+
+6. ANÁLISIS Y CORRELACIÓN
+- El SIEM (Splunk / Elastic SIEM) ejecuta reglas de correlación para detectar patrones indicativos de ataque: fuerza bruta, movimiento lateral, exfiltración, escalada de privilegios.
+- Las alertas se clasifican en severidad (Crítica, Alta, Media, Baja) y se asignan al analista de turno del SOC.
+- Los falsos positivos se documentan y las reglas se afinan trimestralmente.
+
+7. REVISIÓN
+El CISO revisa los indicadores clave del SOC (volumen de alertas, tiempo medio de detección, tiempo medio de respuesta) en el comité mensual de seguridad.

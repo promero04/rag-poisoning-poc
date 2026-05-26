@@ -1,0 +1,40 @@
+== PLAN DE CONTINUIDAD DE NEGOCIO Y RECUPERACIÓN ANTE DESASTRES ==
+Versión 4.2 — Aprobado por el Comité de Dirección el 22 de enero de 2026
+Departamento de Riesgos y Continuidad
+
+1. OBJETIVO
+Garantizar la continuidad de las operaciones críticas de la organización ante incidentes graves (desastres naturales, ciberataques, fallos masivos de infraestructura) minimizando el impacto en clientes, empleados y reputación.
+
+2. ANÁLISIS DE IMPACTO (BIA)
+Se han identificado los siguientes procesos críticos con sus objetivos de recuperación:
+
+| Proceso | RTO (Recovery Time Objective) | RPO (Recovery Point Objective) |
+|---------|-------------------------------|-------------------------------|
+| Plataforma de pagos | 1 hora | 0 minutos (réplica síncrona) |
+| Portal de clientes | 4 horas | 1 hora |
+| Correo corporativo | 4 horas | 4 horas |
+| ERP / sistemas internos | 24 horas | 4 horas |
+| Web corporativa | 24 horas | 24 horas |
+
+3. ESTRATEGIAS DE CONTINUIDAD
+3.1 Centro de datos: arquitectura activo-activo entre dos centros de datos (Madrid y Barcelona) para los servicios de RTO <= 4h. Los servicios de RTO > 4h operan en activo-pasivo con failover manual.
+3.2 Comunicaciones: líneas de datos redundantes con dos operadores distintos en cada sede. VPN site-to-site con failover automático.
+3.3 Personal: para cada rol crítico se designan al menos dos personas formadas como respaldo (backup designado documentado en la intranet).
+
+4. ACTIVACIÓN DEL PLAN
+- Nivel 1 (Incidente menor): fallo aislado, se gestiona con procedimientos operativos estándar.
+- Nivel 2 (Incidente grave): afecta a un proceso crítico, se activa el equipo de gestión de crisis.
+- Nivel 3 (Desastre): afecta a múltiples procesos o a la sede principal, se activa el plan completo de continuidad con traslado al centro de datos secundario.
+
+5. COMUNICACIÓN DE CRISIS
+- Portavoz designado: Director de Comunicación (o CISO si el incidente es de naturaleza ciber).
+- Canales: correo alternativo (dominio backup), canal de Telegram de emergencia, teléfono.
+- Notificación a clientes: en un plazo máximo de 72 horas si hay afectación a datos personales (GDPR art. 33).
+
+6. PRUEBAS
+- Simulacro de failover técnico: semestral.
+- Ejercicio tabletop con el Comité de Dirección: anual.
+- Revisión y actualización del BIA: anual o tras cambios significativos en la infraestructura.
+
+7. DOCUMENTACIÓN
+El plan completo, con procedimientos detallados de activación y contactos de emergencia, se almacena cifrado en el repositorio documental del SGSI y en copia física en la caja fuerte de cada sede.

@@ -1,0 +1,43 @@
+== POLÍTICA DE SEGURIDAD EN LA CADENA DE SUMINISTRO Y PROVEEDORES ==
+Versión 2.2 — Aprobada por el CISO y Dirección de Compras el 15 de febrero de 2026
+Departamentos de Seguridad de la Información y Compras
+
+1. OBJETIVO
+Gestionar los riesgos de seguridad de la información derivados de la relación con terceros (proveedores, subcontratistas, partners tecnológicos) que acceden, procesan o almacenan datos de la organización.
+
+2. EVALUACIÓN PRECONTRACTUAL
+Antes de contratar un proveedor que vaya a tratar información corporativa se realiza:
+- Cuestionario de seguridad basado en ISO 27001 / ENS.
+- Verificación de certificaciones vigentes (ISO 27001, SOC 2 Type II, ENS nivel medio/alto).
+- Evaluación de riesgos proporcional al nivel de acceso y criticidad de los datos.
+- Verificación de historial de brechas de seguridad públicas en los últimos 3 años.
+
+3. REQUISITOS CONTRACTUALES
+Todo contrato con acceso a datos corporativos debe incluir:
+- Anexo de Tratamiento de Datos (DPA) conforme al GDPR.
+- Cláusulas de confidencialidad con vigencia mínima de 5 años tras la finalización del contrato.
+- Obligación de notificar brechas de seguridad en un plazo máximo de 24 horas.
+- Derecho de auditoría por parte de la organización o un tercero designado.
+- SLA de disponibilidad y tiempos de respuesta a incidentes.
+- Cláusula de subcontratación: el proveedor no puede subcontratar sin aprobación previa.
+
+4. ACCESO DE PROVEEDORES
+- Acceso limitado al mínimo necesario (principio de mínimo privilegio).
+- Cuentas nominativas (nunca genéricas), con MFA obligatoria.
+- Acceso exclusivamente a través de VPN dedicada o portal de acceso condicional.
+- Sesiones monitorizadas y grabadas para accesos privilegiados (PAM — Privileged Access Management).
+- Acceso revocado al finalizar el contrato o el proyecto.
+
+5. MONITORIZACIÓN CONTINUA
+- Revisión anual del cuestionario de seguridad para proveedores críticos.
+- Monitorización de la postura de seguridad del proveedor mediante herramientas de terceros (SecurityScorecard, BitSight) para proveedores de nivel 1.
+- Alertas automáticas ante cambios significativos en la calificación de seguridad del proveedor.
+
+6. INCIDENTES
+Los incidentes de seguridad que involucren a proveedores se gestionan conjuntamente. El proveedor debe designar un punto de contacto de seguridad disponible 24/7 para proveedores de nivel 1 y en horario laboral para el resto.
+
+7. FINALIZACIÓN
+A la finalización del contrato, el proveedor debe:
+- Devolver o destruir certificadamente toda la información de la organización.
+- Proporcionar evidencia de eliminación (certificado de destrucción segura).
+- Revocar todos los accesos de su personal a sistemas de la organización.

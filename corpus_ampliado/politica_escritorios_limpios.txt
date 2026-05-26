@@ -1,0 +1,35 @@
+== POLÍTICA DE ESCRITORIOS LIMPIOS Y PANTALLAS BLOQUEADAS ==
+Versión 1.5 — Aprobada por el CISO el 20 de marzo de 2026
+Departamento de Seguridad de la Información
+
+1. OBJETIVO
+Minimizar el riesgo de acceso no autorizado a información sensible mediante la protección física de documentos, dispositivos y pantallas en el entorno de trabajo.
+
+2. ALCANCE
+Todo el personal en las instalaciones de la organización (oficinas, salas de reuniones, áreas comunes) y en espacios de teletrabajo.
+
+3. ESCRITORIOS LIMPIOS
+Al abandonar el puesto de trabajo (pausas, reuniones, final de jornada):
+- Los documentos en papel clasificados como INTERNO, CONFIDENCIAL o SECRETO deben guardarse en cajones o armarios con llave.
+- Los dispositivos de almacenamiento extraíble (USB, discos externos) deben guardarse bajo llave.
+- Las pizarras con contenido sensible deben borrarse.
+- Los post-its con contraseñas o información sensible están prohibidos en cualquier circunstancia.
+- Las impresoras compartidas: los documentos se retiran inmediatamente tras su impresión. Los trabajos de impresión no recogidos se destruyen al final del día.
+
+4. PANTALLAS BLOQUEADAS
+- El bloqueo automático de pantalla se configura a un máximo de 5 minutos de inactividad (aplicado por GPO/MDM).
+- El empleado debe bloquear manualmente la pantalla al abandonar el puesto (Cmd+L en macOS, Win+L en Windows).
+- Prohibido desactivar el bloqueo automático o pegar la contraseña en el monitor.
+
+5. DESTRUCCIÓN DE DOCUMENTOS
+- Los documentos en papel que contengan información clasificada se destruyen mediante destructora de corte cruzado (nivel P-4 mínimo según DIN 66399).
+- Los contenedores de destrucción confidencial se gestionan con un proveedor certificado que emite certificado de destrucción.
+
+6. TELETRABAJO
+- En el entorno de teletrabajo se aplican las mismas normas: documentos guardados, pantalla bloqueada, impresión minimizada.
+- Prohibido dejar documentos corporativos visibles en espacios compartidos (coworking, cafeterías).
+- Las videollamadas en espacios públicos deben realizarse con auriculares y sin compartir pantalla con información clasificada si hay personas ajenas presentes.
+
+7. VERIFICACIÓN
+- Inspecciones aleatorias por parte del equipo de seguridad física (mensual en oficinas, sin aviso previo).
+- Las no conformidades se registran y se comunican al responsable del área.

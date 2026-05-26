@@ -1,0 +1,53 @@
+== PROCEDIMIENTO DE RESPUESTA ANTE RANSOMWARE ==
+Versión 2.0 — Aprobado por el CISO y el Comité de Crisis el 25 de febrero de 2026
+Departamento de Operaciones de Seguridad (SOC)
+
+1. OBJETIVO
+Establecer las acciones inmediatas, de contención y de recuperación ante un incidente de ransomware, minimizando el impacto operativo y la pérdida de datos.
+
+2. DETECCIÓN E IDENTIFICACIÓN
+Indicadores de compromiso (IoCs) que pueden activar este procedimiento:
+- Alertas del EDR: proceso de cifrado masivo de archivos, modificación de extensiones conocidas (.locked, .crypt, .ryuk).
+- Múltiples usuarios reportan archivos inaccesibles o con extensiones cambiadas.
+- Aparición de notas de rescate (ransom notes) en el escritorio o en las carpetas compartidas.
+- Tráfico anómalo saliente hacia dominios o IPs asociados a C2 (Command & Control).
+
+3. CONTENCIÓN INMEDIATA (primeros 30 minutos)
+Acciones del analista SOC de turno (NO esperar aprobación para contención):
+- Aislar el equipo afectado de la red (desconectar cable, desactivar Wi-Fi, deshabilitar puerto de switch).
+- Si se sospecha propagación lateral: aislar el segmento de red completo en el firewall.
+- NO apagar el equipo: la RAM puede contener claves de descifrado volátiles.
+- NO intentar descifrar ni ejecutar herramientas de recuperación sin autorización del equipo forense.
+- Bloquear las cuentas potencialmente comprometidas en el directorio activo.
+- Verificar el estado de los backups: confirmar que las copias recientes no están afectadas (comprobar que no ha habido cifrado de los repositorios de backup).
+
+4. ESCALADO
+- Notificar al CISO y al responsable de Continuidad de Negocio.
+- Si afecta a datos personales: notificar al DPO para evaluar obligación de comunicación a la AEPD (72h).
+- Si afecta a servicios críticos: activar el Plan de Continuidad de Negocio (nivel 2 o 3 según impacto).
+- Contactar al proveedor de Incident Response contratado (retainer) para apoyo forense.
+
+5. INVESTIGACIÓN Y ERRADICACIÓN
+- Determinar el vector de entrada (phishing, vulnerabilidad explotada, acceso RDP comprometido, supply chain).
+- Identificar todos los sistemas afectados mediante análisis de IOCs en el SIEM y en los endpoints.
+- Analizar la cepa de ransomware: comprobar si existe descifrador público (NoMoreRansom.org, fabricante del EDR).
+- Eliminar el malware y los mecanismos de persistencia de todos los sistemas afectados.
+- Cambiar todas las credenciales que puedan haber sido comprometidas.
+
+6. RECUPERACIÓN
+- Restaurar sistemas desde backups verificados como limpios (anteriores a la fecha de compromiso inicial).
+- Restaurar en orden de prioridad según el BIA (procesos críticos primero).
+- Monitorizar intensivamente los sistemas restaurados durante las primeras 72 horas.
+- Verificar la integridad de los datos restaurados antes de poner en producción.
+
+7. DECISIÓN SOBRE EL PAGO DEL RESCATE
+La posición de la organización es NO pagar el rescate. Razones:
+- No garantiza la recuperación de los datos.
+- Financia la actividad criminal.
+- Puede generar obligaciones legales (sanciones OFAC si el grupo está en lista negra).
+- Cualquier excepción requiere aprobación del Consejo de Administración con asesoramiento legal.
+
+8. POST-INCIDENTE
+- Informe de lecciones aprendidas en un plazo de 15 días.
+- Actualizar las reglas de detección del SIEM y EDR con los IoCs del incidente.
+- Reforzar los controles que fallaron (parcheado, MFA, segmentación, formación).

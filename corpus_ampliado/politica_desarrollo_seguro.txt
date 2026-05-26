@@ -1,0 +1,44 @@
+== POLÍTICA DE DESARROLLO SEGURO DE SOFTWARE ==
+Versión 2.3 — Aprobada por el CISO el 20 de enero de 2026
+Departamento de Ingeniería de Software
+
+1. OBJETIVO
+Integrar la seguridad en todas las fases del ciclo de vida del desarrollo de software (SDLC), reduciendo vulnerabilidades antes de la puesta en producción.
+
+2. ALCANCE
+Aplica a todo software desarrollado internamente o por terceros bajo contrato, incluyendo aplicaciones web, APIs, microservicios, scripts de automatización e infraestructura como código (IaC).
+
+3. PRINCIPIOS
+- Seguridad por diseño: los requisitos de seguridad se definen en la fase de especificación, no como remediación posterior.
+- Mínimo privilegio en el código: las aplicaciones solicitan únicamente los permisos necesarios para su función.
+- Defensa en profundidad: nunca depender de un solo control de seguridad.
+
+4. PRÁCTICAS OBLIGATORIAS
+4.1 Gestión de dependencias
+- Escaneo automático de dependencias (SCA) en cada build del pipeline CI/CD.
+- Prohibido el uso de bibliotecas con vulnerabilidades críticas (CVSS >= 9.0) conocidas y sin parche disponible.
+- Lockfile obligatorio (package-lock.json, Pipfile.lock, etc.) versionado en el repositorio.
+
+4.2 Análisis estático (SAST)
+- Todo merge request debe pasar análisis SAST antes de la revisión de código.
+- Los hallazgos de severidad Alta o Crítica bloquean el merge automáticamente.
+
+4.3 Revisión de código
+- Toda modificación requiere al menos una revisión por un desarrollador diferente al autor.
+- Cambios en módulos de autenticación, autorización o criptografía requieren revisión adicional del equipo de seguridad.
+
+4.4 Gestión de secretos
+- Prohibido almacenar secretos (API keys, contraseñas, tokens) en el código fuente o en variables de entorno sin cifrar.
+- Uso obligatorio del gestor de secretos corporativo (HashiCorp Vault, AWS Secrets Manager o equivalente).
+- Escaneo de secretos (secret scanning) activo en todos los repositorios.
+
+4.5 Pruebas de seguridad
+- Tests unitarios de seguridad para funciones de autenticación y autorización.
+- Pruebas DAST (Dynamic Application Security Testing) en el entorno de staging antes de cada release a producción.
+- Pentest externo al menos una vez al año para aplicaciones críticas.
+
+5. FORMACIÓN
+Todo desarrollador debe completar al menos 8 horas anuales de formación en desarrollo seguro (OWASP Top 10, SANS Secure Coding).
+
+6. REGISTRO Y MÉTRICAS
+Se monitorizan: número de vulnerabilidades por release, tiempo medio de remediación (MTTR), cobertura de análisis SAST/DAST y tasa de falsos positivos.
