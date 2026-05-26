@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # Empaqueta el proyecto para entrega SDI Deusto 2025/26 — 29 may 2026
 # Uso: bash build_zip.sh
-# Genera: rag_poisoning_poc_pablo_garcia.zip en el directorio padre.
+# Genera: rag_poisoning_poc_romero_diez_furelos.zip en el directorio padre.
 
 set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PARENT_DIR="$(dirname "$PROJECT_DIR")"
-NAME="rag_poisoning_poc_pablo_garcia"
+NAME="rag_poisoning_poc_romero_diez_furelos"
 STAGING="$PARENT_DIR/$NAME"
 ZIP_PATH="$PARENT_DIR/$NAME.zip"
 

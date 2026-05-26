@@ -215,4 +215,4 @@ DEFENSE_ENABLED=true RETRIEVAL_K=5 python demo_poisoning.py --skip-ingest --k 5
 
 ---
 
-*Universidad de Deusto · Seguridad de la Información (SDI) · Curso 2025/26 · Pablo García*
+*Universidad de Deusto · Seguridad de la Información (SDI) · Curso 2025/26 · Pablo Romero, Iker Diez y Jacqueline Furelos*

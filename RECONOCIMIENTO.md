@@ -1,7 +1,7 @@
 # Fase 0 — Reconocimiento del repositorio `rag-poisoning-poc`
 
 > **Modo:** solo lectura, sin modificaciones al código.
-> **Fecha:** 2026-05-18. **Autor del repo:** Pablo García. **Entrega:** 2026-05-29.
+> **Fecha:** 2026-05-18. **Autores del repo:** Pablo Romero, Iker Diez y Jacqueline Furelos. **Entrega:** 2026-05-29.
 > **Asignatura:** Seguridad de la Información (SDI) — Universidad de Deusto, curso 2025/26.
 
 ---

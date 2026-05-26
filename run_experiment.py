@@ -3,7 +3,7 @@ run_experiment.py — Orquestador del experimento completo con captura de logs
 =============================================================================
 Proyecto: RAG Poisoning PoC
 Asignatura: Seguridad de la Información (SDI) — Deusto 2025/26
-Autor: Pablo García
+Autores: Pablo Romero, Iker Diez y Jacqueline Furelos
 
 DESCRIPCIÓN:
     Ejecuta el pipeline completo de demostración en múltiples configuraciones

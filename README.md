@@ -1,7 +1,7 @@
 # RAG Poisoning PoC
 
 **Asignatura:** Seguridad de la Información (SDI) — Universidad de Deusto, 2025/26
-**Autor:** Pablo García
+**Autores:** Pablo Romero, Iker Diez y Jacqueline Furelos
 
 Prueba de concepto académica sobre **envenenamiento de sistemas RAG (Retrieval-Augmented Generation)**. El proyecto monta un pipeline RAG completo sobre ChromaDB y demuestra cómo un atacante con acceso de escritura al corpus puede manipular las respuestas del LLM inyectando documentos maliciosos que se cuelan en el top-k del retriever. Incluye además una **defensa heurística opcional** (filtro de prompt injection) para evaluar la mitigación.
 

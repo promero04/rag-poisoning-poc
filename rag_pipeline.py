@@ -3,7 +3,7 @@ rag_pipeline.py — Pipeline RAG base (fase LIMPIA / baseline)
 =============================================================
 Proyecto: RAG Poisoning PoC
 Asignatura: Seguridad de la Información (SDI) — Deusto 2025/26
-Autor: Pablo García
+Autores: Pablo Romero, Iker Diez y Jacqueline Furelos
 
 Implementa el pipeline RAG completo:
   1. Ingestión: carga documentos → divide en chunks → genera embeddings → almacena en ChromaDB

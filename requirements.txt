@@ -1,6 +1,6 @@
 # RAG Poisoning PoC — Dependencias
 # Proyecto SDI — Seguridad de la Información — Deusto 2025/26
-# Pablo García
+# Pablo Romero, Iker Diez y Jacqueline Furelos
 #
 # Probado con Python 3.13 (Homebrew). Instalar torch CPU-only ANTES de
 # este fichero:

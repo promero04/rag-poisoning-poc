@@ -3,7 +3,7 @@ metricas.py — Análisis de métricas del experimento RAG Poisoning
 =================================================================
 Proyecto: RAG Poisoning PoC
 Asignatura: Seguridad de la Información (SDI) — Deusto 2025/26
-Autor: Pablo García
+Autores: Pablo Romero, Iker Diez y Jacqueline Furelos
 
 DESCRIPCIÓN:
     Lee los JSON de resultados del experimento y produce:

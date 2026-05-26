@@ -3,7 +3,7 @@ poisoning.py — Script de RAG Poisoning (inyección de documentos maliciosos)
 ============================================================================
 Proyecto: RAG Poisoning PoC
 Asignatura: Seguridad de la Información (SDI) — Deusto 2025/26
-Autor: Pablo García
+Autores: Pablo Romero, Iker Diez y Jacqueline Furelos
 
 CONTEXTO ACADÉMICO:
     Este script es parte de un trabajo de seguridad informática que demuestra

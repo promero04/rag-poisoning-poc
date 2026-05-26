@@ -3,7 +3,7 @@ demo_poisoning.py — Demo E2: Comparativa RAG Limpio vs. Envenenado
 ===================================================================
 Proyecto: RAG Poisoning PoC
 Asignatura: Seguridad de la Información (SDI) — Deusto 2025/26
-Autor: Pablo García
+Autores: Pablo Romero, Iker Diez y Jacqueline Furelos
 
 DESCRIPCIÓN:
     Este script ejecuta el pipeline completo de demostración del ataque:
