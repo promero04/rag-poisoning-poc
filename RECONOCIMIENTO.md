@@ -8,7 +8,7 @@
 
 ## Contexto
 
-Este informe documenta el estado del repositorio `rag-poisoning-poc` antes de comenzar cualquier modificación. El repo contiene **un único commit** (`2f62849 Initial commit`) heredado de una conversación anterior con Claude. El objetivo es entender qué hay, qué funciona y qué falta, sin tocar nada, para planificar la entrega del 29 de mayo (documento descriptivo + vídeo ≤ 2:30 min).
+Este informe documenta el estado del repositorio `rag-poisoning-poc` antes de comenzar cualquier modificación. El repo contiene **un único commit** (`2f62849 Initial commit`) heredado de una iteración previa del proyecto. El objetivo es entender qué hay, qué funciona y qué falta, sin tocar nada, para planificar la entrega del 29 de mayo (documento descriptivo + vídeo ≤ 2:30 min).
 
 > ⚠ **Aviso de entorno:** este reconocimiento se realizó desde Windows 11 (PowerShell), pero el usuario ejecutará el código en un **Mac M4**. El proyecto incluye un `setup.sh` POSIX-only — funciona nativamente en Mac/Linux y **no en Windows sin adaptación**. Por tanto los comandos de instalación se documentan para Mac/Linux, que es el entorno de destino real.
 
